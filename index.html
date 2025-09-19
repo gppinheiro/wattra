@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wattra - Advanced DataCenter AI Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🔋 Wattra</h1>
+                <span class="nav-subtitle">AI DataCenter Platform</span>
+            </div>
+            <div class="nav-right">
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="en">
+                        <span class="flag">🇺🇸</span> EN
+                    </button>
+                    <button class="lang-btn" data-lang="pt">
+                        <span class="flag">🇵🇹</span> PT
+                    </button>
+                </div>
+                <div class="notification-bell" id="notificationBell">
+                    <span class="bell-icon">🔔</span>
+                    <span class="notification-count">3</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Navigation Tabs -->
+    <div class="main-nav">
+        <div class="nav-container">
+            <button class="nav-tab active" data-tab="dashboard" data-i18n="dashboard">Dashboard</button>
+            <button class="nav-tab" data-tab="energy-sources" data-i18n="energySources">Energy Sources</button>
+            <button class="nav-tab" data-tab="contracts" data-i18n="contracts">Energy Provider Contracts</button>
+            <button class="nav-tab" data-tab="sustainability" data-i18n="sustainability">Sustainability</button>
+            <button class="nav-tab" data-tab="workload" data-i18n="workload">Workload Management</button>
+            <button class="nav-tab" data-tab="reports" data-i18n="reports">Reports</button>
+            <button class="nav-tab" data-tab="user-profile" data-i18n="userProfile">User Profile</button>
+        </div>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notificationPanel">
+        <div class="notification-header">
+            <h3 data-i18n="notifications">Notifications</h3>
+            <button class="close-btn" id="closeNotifications">×</button>
+        </div>
+        <div class="notification-list" id="notificationList">
+            <!-- Notifications will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Tab -->
+        <section class="tab-content active" id="dashboard-tab">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div class="header-info">
+                    <h2>Portugal & Spain Energy Management</h2>
+                    <p class="header-subtitle">Real-time monitoring and AI optimization for your data center operations</p>
+                </div>
+                <div class="time-selector">
+                    <button class="time-btn active" data-time="hourly" data-i18n="hourlyView">Hourly</button>
+                    <button class="time-btn" data-time="daily" data-i18n="dailyView">Daily</button>
+                    <button class="time-btn" data-time="monthly" data-i18n="monthlyView">Monthly</button>
+                    <button class="time-btn" data-time="yearly" data-i18n="yearlyView">Yearly</button>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn--primary" id="refreshData">
+                        <span class="btn-icon">🔄</span>
+                        <span data-i18n="refreshData">Refresh Data</span>
+                    </button>
+                    <span class="last-update">Last updated: <span id="lastUpdateTime">10:09 AM</span></span>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card consumption">
+                    <div class="kpi-icon">⚡</div>
+                    <div class="kpi-content">
+                        <h3 data-i18n="totalConsumption">Total Consumption</h3>
+                        <div class="kpi-value" id="totalConsumption">2,847.5 kWh</div>
+                        <div class="kpi-change positive" id="consumptionTrend">+2.3%</div>
+                    </div>
+                </div>
+                <div class="kpi-card cost">
+                    <div class="kpi-icon">💰</div>
+                    <div class="kpi-content">
+                        <h3 data-i18n="energyCost">Energy Cost</h3>
+                        <div class="kpi-value" id="energyCost">€1,203.85</div>
+                        <div class="kpi-change negative" id="costTrend">+1.8%</div>
+                    </div>
+                </div>
+                <div class="kpi-card emissions">
+                    <div class="kpi-icon">🌱</div>
+                    <div class="kpi-content">
+                        <h3 data-i18n="carbonEmissions">Carbon Emissions</h3>
+                        <div class="kpi-value" id="carbonEmissions">1,895.2 kg CO₂</div>
+                        <div class="kpi-change positive" id="emissionsTrend">-5.2%</div>
+                    </div>
+                </div>
+                <div class="kpi-card production">
+                    <div class="kpi-icon">🔋</div>
+                    <div class="kpi-content">
+                        <h3 data-i18n="currentProduction">Current Production</h3>
+                        <div class="kpi-value" id="currentProduction">1,956.3 kW</div>
+                        <div class="kpi-change positive" id="productionTrend">+8.4%</div>
+                    </div>
+                </div>
+                <div class="kpi-card pue">
+                    <div class="kpi-icon">📊</div>
+                    <div class="kpi-content">
+                        <h3>PUE</h3>
+                        <div class="kpi-value" id="pueValue">1.42</div>
+                        <div class="kpi-change positive" id="pueTrend">-0.03</div>
+                    </div>
+                </div>
+                <div class="kpi-card efficiency">
+                    <div class="kpi-icon">⚙️</div>
+                    <div class="kpi-content">
+                        <h3>Efficiency Score</h3>
+                        <div class="kpi-value" id="efficiencyScore">87.3%</div>
+                        <div class="kpi-change positive" id="efficiencyTrend">+1.2%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Cost Breakdown Analysis</h3>
+                        <div class="chart-controls">
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #1FB8CD;"></span> 
+                                    <span>Energy</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #FFC185;"></span> 
+                                    <span>Infrastructure</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #B4413C;"></span> 
+                                    <span>Maintenance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="position: relative; height: 320px;">
+                        <canvas id="costBreakdownChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Energy Sources Distribution</h3>
+                    </div>
+                    <div class="chart-container" style="position: relative; height: 320px;">
+                        <canvas id="energyMixChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Energy Sources Tab -->
+        <section class="tab-content" id="energy-sources-tab">
+            <div class="energy-sources-layout">
+                <div class="section-header">
+                    <h2 data-i18n="energySources">Energy Sources</h2>
+                    <p class="section-subtitle">Monitor and optimize your renewable energy sources</p>
+                </div>
+
+                <!-- Energy Source Cards -->
+                <div class="energy-sources-grid">
+                    <div class="energy-source-card solar-card">
+                        <div class="source-header">
+                            <div class="source-icon">☀️</div>
+                            <div class="source-info">
+                                <h3>Solar Power</h3>
+                                <div class="source-status active">Active Production</div>
+                            </div>
+                        </div>
+                        <div class="source-metrics">
+                            <div class="metric-item">
+                                <span class="metric-label">Current Output</span>
+                                <span class="metric-value" id="solarCurrent">1,240 kW</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Capacity</span>
+                                <span class="metric-value">1,200 kW</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label" data-i18n="costPerKwh">Cost per kWh</span>
+                                <span class="metric-value cost-value" id="solarCost">€0.045</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Efficiency</span>
+                                <span class="metric-value">85%</span>
+                            </div>
+                        </div>
+                        <div class="source-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill solar-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="progress-text">85% of capacity</span>
+                        </div>
+                    </div>
+
+                    <div class="energy-source-card wind-card">
+                        <div class="source-header">
+                            <div class="source-icon">💨</div>
+                            <div class="source-info">
+                                <h3>Wind Power</h3>
+                                <div class="source-status active">Active Production</div>
+                            </div>
+                        </div>
+                        <div class="source-metrics">
+                            <div class="metric-item">
+                                <span class="metric-label">Current Output</span>
+                                <span class="metric-value" id="windCurrent">680 kW</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Capacity</span>
+                                <span class="metric-value">800 kW</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label" data-i18n="costPerKwh">Cost per kWh</span>
+                                <span class="metric-value cost-value" id="windCost">€0.052</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Wind Speed</span>
+                                <span class="metric-value">12 m/s</span>
+                            </div>
+                        </div>
+                        <div class="source-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill wind-fill" style="width: 60%"></div>
+                            </div>
+                            <span class="progress-text">60% efficiency</span>
+                        </div>
+                    </div>
+
+                    <div class="energy-source-card grid-card">
+                        <div class="source-header">
+                            <div class="source-icon">⚡</div>
+                            <div class="source-info">
+                                <h3>Grid Supply</h3>
+                                <div class="source-status connected">Connected</div>
+                            </div>
+                        </div>
+                        <div class="source-metrics">
+                            <div class="metric-item">
+                                <span class="metric-label">Current Draw</span>
+                                <span class="metric-value" id="gridCurrent">487.7 kW</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Reliability</span>
+                                <span class="metric-value">99.8%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label" data-i18n="costPerKwh">Cost per kWh</span>
+                                <span class="metric-value cost-value" id="gridCost">€0.095</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Renewable %</span>
+                                <span class="metric-value">35%</span>
+                            </div>
+                        </div>
+                        <div class="source-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill grid-fill" style="width: 99.8%"></div>
+                            </div>
+                            <span class="progress-text">99.8% reliability</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contracts Tab -->
+        <section class="tab-content" id="contracts-tab">
+            <div class="contracts-layout">
+                <!-- Active Contract Banner -->
+                <div class="active-contract-banner" id="activeContractBanner">
+                    <div class="banner-content">
+                        <div class="banner-icon">✅</div>
+                        <div class="banner-info">
+                            <h3 data-i18n="activeContract">Active Contract</h3>
+                            <div class="active-contract-details" id="activeContractDetails">
+                                <div><strong>EDP Renewables</strong> - Solar Energy Supply</div>
+                                <div>Rate: €0.045/kWh • 100% Renewable</div>
+                                <div>Contract: 3 years • Monthly: €38,420</div>
+                            </div>
+                        </div>
+                        <div class="banner-actions">
+                            <button class="btn btn--outline btn--sm" id="viewActiveContract">View Details</button>
+                            <button class="btn btn--secondary btn--sm" id="switchProvider" data-i18n="switchProvider">Switch Provider</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h2>Energy Provider Contract Management</h2>
+                    <p class="section-subtitle">Manage your energy supply contracts across Portugal and Spain markets</p>
+                </div>
+
+                <div class="contracts-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 data-i18n="availableContracts">Available Contracts</h3>
+                            <div class="contract-count">
+                                <span id="contractCount">4</span> available providers
+                            </div>
+                        </div>
+                        
+                        <!-- Available Contracts Table -->
+                        <div class="contracts-table-container">
+                            <table class="contracts-table" id="contractsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Provider</th>
+                                        <th>Type</th>
+                                        <th>Country</th>
+                                        <th>Fixed Price</th>
+                                        <th>Market Price</th>
+                                        <th>Reliability</th>
+                                        <th>Renewable %</th>
+                                        <th>Capacity</th>
+                                        <th>Best Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contractsTableBody">
+                                    <!-- Table rows will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sustainability Tab -->
+        <section class="tab-content" id="sustainability-tab">
+            <div class="sustainability-layout">
+                <!-- Costs & Carbon Optimization -->
+                <div class="section-header">
+                    <h2>Costs & Carbon Optimization</h2>
+                    <p class="section-subtitle">Investment recommendations for Portugal & Spain markets</p>
+                </div>
+
+                <div class="optimization-overview">
+                    <div class="optimization-metrics">
+                        <div class="optimization-metric">
+                            <div class="metric-value">€4,434</div>
+                            <div class="metric-label">Monthly Savings Available</div>
+                        </div>
+                        <div class="optimization-metric">
+                            <div class="metric-value">€53,208</div>
+                            <div class="metric-label">Yearly Projection</div>
+                        </div>
+                        <div class="optimization-metric">
+                            <div class="metric-value">24,700 kg</div>
+                            <div class="metric-label">CO₂ Reduction Potential</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Integration Section -->
+                <div class="weather-integration-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Weather Impact Analysis</h3>
+                            <button class="btn btn--primary" id="weatherIntegration" data-i18n="weatherIntegration">
+                                <span class="btn-icon">🌤️</span>
+                                Weather Integration
+                            </button>
+                        </div>
+                        <div class="weather-overview" id="weatherOverview">
+                            <div class="current-weather">
+                                <div class="weather-location">
+                                    <h4>Lisboa, Portugal</h4>
+                                    <div class="weather-condition">⛅ Partly Cloudy • 24°C</div>
+                                </div>
+                                <div class="energy-production">
+                                    <div class="production-metric">
+                                        <span class="production-label">Solar Output</span>
+                                        <span class="production-value">1,240 kW</span>
+                                    </div>
+                                    <div class="production-metric">
+                                        <span class="production-label">Wind Output</span>
+                                        <span class="production-value">680 kW</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Energy Consumption & Carbon Emission Forecast -->
+                <div class="forecast-section">
+                    <div class="card">
+                        <div class="forecast-header">
+                            <h3>Energy Consumption & Carbon Emission Forecast</h3>
+                            <div class="forecast-time-selector">
+                                <button class="forecast-time-btn active" data-period="1day" data-i18n="1day">1 Day</button>
+                                <button class="forecast-time-btn" data-period="6months" data-i18n="6months">6 Months</button>
+                                <button class="forecast-time-btn" data-period="1year" data-i18n="1year">1 Year</button>
+                                <button class="forecast-time-btn" data-period="5years" data-i18n="5years">5 Years</button>
+                            </div>
+                        </div>
+                        <div class="chart-container" style="position: relative; height: 400px;">
+                            <canvas id="sustainabilityForecastChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workload Tab -->
+        <section class="tab-content" id="workload-tab">
+            <div class="workload-layout">
+                <div class="section-header">
+                    <h2 data-i18n="workload">Workload Management & AI Optimization</h2>
+                    <p class="section-subtitle">Optimize your compute workloads for energy efficiency</p>
+                </div>
+
+                <div class="active-tasks">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 data-i18n="activeTasks">Active Tasks</h3>
+                            <div class="task-summary">
+                                <span id="runningTasksCount">2</span> running • <span id="queuedTasksCount">1</span> queued
+                            </div>
+                        </div>
+                        <div class="task-grid" id="taskGrid">
+                            <!-- Task cards will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-recommendations">
+                    <div class="card">
+                        <h3 data-i18n="aiRecommendations">AI Optimization Recommendations</h3>
+                        <div class="ai-recommendations-grid" id="workloadRecommendations">
+                            <!-- AI recommendations will be populated by JavaScript as individual boxes -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Tab -->
+        <section class="tab-content" id="reports-tab">
+            <div class="reports-layout">
+                <div class="section-header">
+                    <h2>Savings & Performance Reports</h2>
+                    <p class="section-subtitle">Generate comprehensive analysis reports for stakeholders</p>
+                </div>
+
+                <!-- Time Range Savings Projections -->
+                <div class="savings-projections">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 data-i18n="savingsProjection">Projected Savings from AI Recommendations</h3>
+                            <div class="time-range-selector">
+                                <button class="time-range-btn active" data-range="1month">1 Month</button>
+                                <button class="time-range-btn" data-range="6months">6 Months</button>
+                                <button class="time-range-btn" data-range="1year">1 Year</button>
+                                <button class="time-range-btn" data-range="2years">2 Years</button>
+                                <button class="time-range-btn" data-range="5years">5 Years</button>
+                            </div>
+                        </div>
+                        
+                        <div class="savings-overview" id="savingsOverview">
+                            <div class="savings-header">
+                                <div class="savings-total">
+                                    <div class="savings-amount" id="savingsAmount">€6,302</div>
+                                    <div class="savings-period" id="savingsPeriod">1 Month Projection</div>
+                                </div>
+                                <div class="savings-roi">
+                                    <div class="roi-value" id="roiValue">8.2%</div>
+                                    <div class="roi-label">ROI</div>
+                                </div>
+                                <div class="carbon-savings">
+                                    <div class="carbon-value" id="carbonValue">5,200 kg</div>
+                                    <div class="carbon-label">CO₂ Reduction</div>
+                                </div>
+                            </div>
+                            
+                            <div class="savings-breakdown" id="savingsBreakdown">
+                                <!-- Breakdown will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-generation">
+                    <div class="card">
+                        <h3>Generate Reports</h3>
+                        <div class="report-form">
+                            <div class="form-group">
+                                <label class="form-label">Report Type</label>
+                                <select class="form-control" id="reportType">
+                                    <option value="savings">Savings Analysis Report</option>
+                                    <option value="sustainability">Sustainability Report</option>
+                                    <option value="energy">Energy Efficiency Report</option>
+                                    <option value="compliance">ESG Compliance Report</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Export Format</label>
+                                <select class="form-control" id="exportFormat">
+                                    <option value="pdf">PDF Report</option>
+                                    <option value="excel">Excel Spreadsheet</option>
+                                    <option value="csv">CSV Data</option>
+                                </select>
+                            </div>
+                            <button class="btn btn--primary btn--full-width" id="generateReport">
+                                <span class="btn-icon">📄</span>
+                                <span data-i18n="exportReport">Generate Report</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Profile Tab -->
+        <section class="tab-content" id="user-profile-tab">
+            <div class="user-profile-layout">
+                <div class="section-header">
+                    <h2 data-i18n="userProfile">User Profile & Settings</h2>
+                    <p class="section-subtitle">Configure features, set goals, and customize your experience</p>
+                </div>
+
+                <!-- Feature Control Dashboard -->
+                <div class="feature-controls">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 data-i18n="featureControls">Feature Controls</h3>
+                            <p>Toggle which tabs and sections are visible in your dashboard</p>
+                        </div>
+                        <div class="feature-control-grid" id="featureControlGrid">
+                            <!-- Feature controls will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Goals and Settings -->
+                <div class="goals-settings">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 data-i18n="goalsSettings">Goals & Settings</h3>
+                            <p>Configure your sustainability and efficiency targets</p>
+                        </div>
+                        <div class="goals-grid" id="goalsGrid">
+                            <!-- Goals will be populated by JavaScript with radio buttons and status badges -->
+                        </div>
+                        <div class="goals-actions">
+                            <button class="btn btn--primary" id="saveGoals">Save Goals</button>
+                            <button class="btn btn--secondary" id="resetGoals">Reset to Defaults</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal hidden" id="switchProviderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Switch Energy Provider</h3>
+                <button class="close-modal" data-target="switchProviderModal">×</button>
+            </div>
+            <div class="modal-body" id="switchProviderModalBody">
+                <!-- Content populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal hidden" id="weatherModal">
+        <div class="modal-content weather-modal">
+            <div class="modal-header">
+                <h3>Interactive Weather Dashboard</h3>
+                <button class="close-modal" data-target="weatherModal">×</button>
+            </div>
+            <div class="modal-body" id="weatherModalBody">
+                <!-- Content populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Updating data...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
