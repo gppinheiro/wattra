@@ -1,5 +1,64 @@
 // Enhanced Application Data with Portugal & Spain Context
 const appData = {
+  // Data Center Context - Multi-site architecture
+  "dataCenterContext": {
+    "currentSite": {
+      "id": "feup",
+      "name": "FEUP",
+      "fullName": "Faculdade de Engenharia da Universidade do Porto",
+      "location": "Porto, Portugal",
+      "subdivision": {
+        "id": "redes-dados",
+        "name": "Redes e Dados",
+        "type": "department"
+      },
+      "metadata": {
+        "capacity": "500 kW",
+        "pue": 1.42,
+        "established": "1988",
+        "contact": "datacenter@fe.up.pt"
+      }
+    },
+    "availableSites": [
+      {
+        "id": "feup",
+        "name": "FEUP",
+        "fullName": "Faculdade de Engenharia da Universidade do Porto",
+        "location": "Porto, Portugal",
+        "subdivisions": [
+          { "id": "redes-dados", "name": "Redes e Dados", "type": "department" },
+          { "id": "desenvolvimento", "name": "Desenvolvimento", "type": "department" },
+          { "id": "servicos", "name": "Serviços", "type": "department" }
+        ]
+      },
+      {
+        "id": "fcup",
+        "name": "FCUP",
+        "fullName": "Faculdade de Ciências da Universidade do Porto",
+        "location": "Porto, Portugal",
+        "subdivisions": [
+          { "id": "redes-dados", "name": "Redes e Dados", "type": "department" },
+          { "id": "desenvolvimento", "name": "Desenvolvimento", "type": "department" }
+        ]
+      },
+      {
+        "id": "reitoria",
+        "name": "Reitoria",
+        "fullName": "Reitoria da Universidade do Porto",
+        "location": "Porto, Portugal",
+        "subdivisions": [
+          { "id": "redes-dados", "name": "Redes e Dados", "type": "department" },
+          { "id": "servicos", "name": "Serviços", "type": "department" }
+        ]
+      }
+    ],
+    "industryProfile": {
+      "type": "university",
+      "name": "University Data Center",
+      "modules": ["academic-research", "administrative-services", "student-services"],
+      "reportTemplates": ["esg-compliance", "research-impact", "operational-efficiency"]
+    }
+  },
   "marketContext": {
     "region": "Portugal & Spain Energy Markets",
     "currency": "EUR",
@@ -15,6 +74,167 @@ const appData = {
     "pue": 1.42,
     "efficiencyScore": 87.3,
     "lastUpdate": "2025-09-19T10:09:00Z"
+  },
+  // Granular Consumption Monitoring - Machine and Outlet Level
+  "granularConsumption": {
+    "zones": [
+      {
+        "id": "zone-1",
+        "name": "Server Room A",
+        "type": "server_room",
+        "totalConsumption": 1250.5,
+        "machines": [
+          {
+            "id": "machine-1",
+            "name": "Rack 01 - Server Cluster",
+            "type": "server_rack",
+            "consumption": 450.2,
+            "outlets": [
+              { "id": "outlet-1-1", "name": "PDU 01", "consumption": 225.1, "status": "active" },
+              { "id": "outlet-1-2", "name": "PDU 02", "consumption": 225.1, "status": "active" }
+            ],
+            "status": "active"
+          },
+          {
+            "id": "machine-2",
+            "name": "Rack 02 - Storage Array",
+            "type": "storage",
+            "consumption": 320.8,
+            "outlets": [
+              { "id": "outlet-2-1", "name": "PSU 01", "consumption": 160.4, "status": "active" },
+              { "id": "outlet-2-2", "name": "PSU 02", "consumption": 160.4, "status": "active" }
+            ],
+            "status": "active"
+          },
+          {
+            "id": "machine-3",
+            "name": "Rack 03 - Network Equipment",
+            "type": "network",
+            "consumption": 479.5,
+            "outlets": [
+              { "id": "outlet-3-1", "name": "Main Switch", "consumption": 280.2, "status": "active" },
+              { "id": "outlet-3-2", "name": "Router Cluster", "consumption": 199.3, "status": "active" }
+            ],
+            "status": "active"
+          }
+        ],
+        "groups": [
+          {
+            "id": "group-compute",
+            "name": "Compute Resources",
+            "type": "department",
+            "consumption": 770.1,
+            "machineIds": ["machine-1"]
+          },
+          {
+            "id": "group-storage",
+            "name": "Storage Resources",
+            "type": "department",
+            "consumption": 320.8,
+            "machineIds": ["machine-2"]
+          },
+          {
+            "id": "group-network",
+            "name": "Network Infrastructure",
+            "type": "department",
+            "consumption": 479.5,
+            "machineIds": ["machine-3"]
+          }
+        ]
+      },
+      {
+        "id": "zone-2",
+        "name": "Server Room B",
+        "type": "server_room",
+        "totalConsumption": 950.3,
+        "machines": [
+          {
+            "id": "machine-4",
+            "name": "Rack 04 - Backup Servers",
+            "type": "backup",
+            "consumption": 450.8,
+            "outlets": [
+              { "id": "outlet-4-1", "name": "Backup PDU 01", "consumption": 225.4, "status": "active" },
+              { "id": "outlet-4-2", "name": "Backup PDU 02", "consumption": 225.4, "status": "active" }
+            ],
+            "status": "active"
+          },
+          {
+            "id": "machine-5",
+            "name": "Rack 05 - Development Servers",
+            "type": "development",
+            "consumption": 499.5,
+            "outlets": [
+              { "id": "outlet-5-1", "name": "Dev PDU 01", "consumption": 249.75, "status": "active" },
+              { "id": "outlet-5-2", "name": "Dev PDU 02", "consumption": 249.75, "status": "active" }
+            ],
+            "status": "active"
+          }
+        ],
+        "groups": [
+          {
+            "id": "group-backup",
+            "name": "Backup Systems",
+            "type": "service",
+            "consumption": 450.8,
+            "machineIds": ["machine-4"]
+          },
+          {
+            "id": "group-development",
+            "name": "Development Environment",
+            "type": "department",
+            "consumption": 499.5,
+            "machineIds": ["machine-5"]
+          }
+        ]
+      },
+      {
+        "id": "zone-3",
+        "name": "Cooling & Infrastructure",
+        "type": "infrastructure",
+        "totalConsumption": 646.7,
+        "machines": [
+          {
+            "id": "machine-6",
+            "name": "HVAC System",
+            "type": "cooling",
+            "consumption": 450.2,
+            "outlets": [
+              { "id": "outlet-6-1", "name": "HVAC Unit 01", "consumption": 225.1, "status": "active" },
+              { "id": "outlet-6-2", "name": "HVAC Unit 02", "consumption": 225.1, "status": "active" }
+            ],
+            "status": "active"
+          },
+          {
+            "id": "machine-7",
+            "name": "UPS Systems",
+            "type": "power",
+            "consumption": 196.5,
+            "outlets": [
+              { "id": "outlet-7-1", "name": "UPS Main", "consumption": 98.25, "status": "active" },
+              { "id": "outlet-7-2", "name": "UPS Backup", "consumption": 98.25, "status": "active" }
+            ],
+            "status": "active"
+          }
+        ],
+        "groups": [
+          {
+            "id": "group-cooling",
+            "name": "Cooling Systems",
+            "type": "infrastructure",
+            "consumption": 450.2,
+            "machineIds": ["machine-6"]
+          },
+          {
+            "id": "group-power",
+            "name": "Power Infrastructure",
+            "type": "infrastructure",
+            "consumption": 196.5,
+            "machineIds": ["machine-7"]
+          }
+        ]
+      }
+    ]
   },
   "timeBasedData": {
     "hourly": {
@@ -64,7 +284,13 @@ const appData = {
         "contractOptimization": 1050
       },
       "roi": "8.2%",
-      "carbonReduction": 5200
+      "carbonReduction": 5200,
+      "forecastReliability": {
+        "confidence": 95,
+        "status": "reliable",
+        "method": "statistical_forecast",
+        "warning": null
+      }
     },
     "6months": {
       "total": 37812,
@@ -75,7 +301,13 @@ const appData = {
         "contractOptimization": 6305
       },
       "roi": "12.8%",
-      "carbonReduction": 31200
+      "carbonReduction": 31200,
+      "forecastReliability": {
+        "confidence": 85,
+        "status": "moderate",
+        "method": "statistical_forecast",
+        "warning": "Forecast confidence decreases with longer timeframes"
+      }
     },
     "1year": {
       "total": 75632,
@@ -86,7 +318,13 @@ const appData = {
         "contractOptimization": 12620
       },
       "roi": "15.4%",
-      "carbonReduction": 62400
+      "carbonReduction": 62400,
+      "forecastReliability": {
+        "confidence": 70,
+        "status": "low",
+        "method": "extrapolated_forecast",
+        "warning": "Forecasts beyond 1 year have reduced reliability. Use for planning purposes only."
+      }
     },
     "2years": {
       "total": 160840,
@@ -97,7 +335,13 @@ const appData = {
         "contractOptimization": 26840
       },
       "roi": "18.9%",
-      "carbonReduction": 132800
+      "carbonReduction": 132800,
+      "forecastReliability": {
+        "confidence": 55,
+        "status": "unreliable",
+        "method": "projected_estimate",
+        "warning": "Forecasts beyond 2 years are highly unreliable. Based on current trends and may not reflect future changes."
+      }
     },
     "5years": {
       "total": 445280,
@@ -108,7 +352,13 @@ const appData = {
         "contractOptimization": 74050
       },
       "roi": "24.7%",
-      "carbonReduction": 367200
+      "carbonReduction": 367200,
+      "forecastReliability": {
+        "confidence": 35,
+        "status": "unreliable",
+        "method": "scenario_estimate",
+        "warning": "Forecasts beyond 5 years are highly speculative and should be used only for long-term planning scenarios."
+      }
     }
   },
   // Enhanced Energy Providers with Max MW, Hybrid Tariffs, and AlphaEnergy
@@ -262,6 +512,262 @@ const appData = {
       "isCurrent": false
     }
   ],
+  // Enhanced Contract Management - Lock-in Tracking, Risk Profiles, Advanced Criteria
+  "enhancedContractManagement": {
+    "currentContracts": [
+      {
+        "id": 1,
+        "provider": "EDP Renewables",
+        "type": "Fixed",
+        "startDate": "2023-01-15",
+        "endDate": "2026-01-15",
+        "lockInPeriod": {
+          "enabled": true,
+          "endDate": "2025-07-15",
+          "daysRemaining": 178,
+          "earlyTerminationFee": 15000,
+          "warning": "Lock-in period ends in 178 days"
+        },
+        "riskProfile": {
+          "financial": "low",
+          "operational": "low",
+          "regulatory": "low",
+          "environmental": "very_low",
+          "overall": "low"
+        },
+        "sustainabilityCertifications": ["ISO 14001", "RE100", "Carbon Neutral"],
+        "vendorRiskProfile": {
+          "creditRating": "AAA",
+          "marketPosition": "strong",
+          "reliability": 98.5,
+          "riskScore": 15
+        },
+        "matchingCriteria": {
+          "maxMW": 5,
+          "renewablePercent": 100,
+          "pricePerKWh": 0.045,
+          "sustainabilityCertifications": true,
+          "vendorRiskMax": 20
+        }
+      }
+    ],
+    "contractCriteria": {
+      "maxMW": {
+        "min": 1,
+        "max": 10,
+        "preferred": 7
+      },
+      "renewablePercent": {
+        "min": 70,
+        "max": 100,
+        "preferred": 85
+      },
+      "pricePerKWh": {
+        "max": 0.090,
+        "preferred": 0.050
+      },
+      "reliability": {
+        "min": 95,
+        "preferred": 98
+      },
+      "sustainabilityCertifications": ["ISO 14001", "RE100", "Carbon Neutral", "B-Corp"],
+      "vendorRiskMax": 25,
+      "lockInPeriod": {
+        "maxDays": 365,
+        "preferredDays": 0
+      }
+    },
+    "contractNegotiations": [
+      {
+        "id": 1,
+        "provider": "AlphaEnergy",
+        "status": "in_progress",
+        "startDate": "2025-01-10",
+        "lastUpdate": "2025-01-19",
+        "proposals": [
+          {
+            "date": "2025-01-10",
+            "type": "initial",
+            "details": "Initial contract proposal received"
+          },
+          {
+            "date": "2025-01-15",
+            "type": "counter",
+            "details": "Counter-proposal submitted with improved terms"
+          }
+        ]
+      }
+    ]
+  },
+  // ESG Compliance Reporting
+  "esgCompliance": {
+    "reportTemplates": [
+      {
+        "id": "esg-full",
+        "name": "Full ESG Compliance Report",
+        "type": "regulatory",
+        "sections": [
+          "executive_summary",
+          "carbon_footprint",
+          "energy_consumption",
+          "renewable_energy_usage",
+          "water_usage",
+          "waste_management",
+          "sustainability_initiatives",
+          "compliance_checklist",
+          "audit_trail"
+        ],
+        "suitableFor": ["regulatory_submission", "stakeholder_report", "audit"]
+      },
+      {
+        "id": "esg-carbon",
+        "name": "Carbon Emissions Report",
+        "type": "focused",
+        "sections": [
+          "carbon_footprint",
+          "emissions_by_source",
+          "reduction_targets",
+          "offset_programs",
+          "verification"
+        ],
+        "suitableFor": ["carbon_registry", "compliance", "verification"]
+      },
+      {
+        "id": "esg-energy",
+        "name": "Energy Efficiency Report",
+        "type": "focused",
+        "sections": [
+          "energy_consumption",
+          "efficiency_metrics",
+          "optimization_initiatives",
+          "renewable_integration",
+          "future_goals"
+        ],
+        "suitableFor": ["energy_audit", "efficiency_certification", "stakeholder_report"]
+      }
+    ],
+    "complianceChecklist": {
+      "regulatory": {
+        "eu_taxonomy": true,
+        "sfdr_disclosure": true,
+        "carbon_reporting": true,
+        "energy_efficiency_directive": true
+      },
+      "certifications": {
+        "iso_14001": true,
+        "iso_50001": true,
+        "re100": false,
+        "carbon_neutral": false
+      },
+      "data_verification": {
+        "third_party_audit": false,
+        "automated_validation": true,
+        "historical_tracking": true
+      }
+    },
+    "auditTrail": {
+      "enabled": true,
+      "retentionDays": 2555,
+      "lastAudit": "2025-01-15",
+      "nextAudit": "2025-04-15"
+    }
+  },
+  // Legacy System Integration Management
+  "integrationManagement": {
+    "integrations": [
+      {
+        "id": "bms-01",
+        "name": "Building Management System",
+        "type": "bms",
+        "status": "connected",
+        "health": "healthy",
+        "lastSync": "2025-01-19T10:09:00Z",
+        "endpoint": "https://api.bms.example.com/v1",
+        "apiKey": "***hidden***",
+        "dataSources": ["temperature", "humidity", "power_consumption"],
+        "syncInterval": 300,
+        "config": {
+          "retryOnFailure": true,
+          "maxRetries": 3,
+          "timeout": 5000
+        }
+      },
+      {
+        "id": "legacy-module-01",
+        "name": "Legacy Module Connector",
+        "type": "legacy",
+        "status": "connected",
+        "health": "warning",
+        "lastSync": "2025-01-19T09:45:00Z",
+        "endpoint": "http://legacy.local:8080/api",
+        "dataSources": ["power_meters", "pdus"],
+        "syncInterval": 600,
+        "config": {
+          "retryOnFailure": true,
+          "maxRetries": 5,
+          "timeout": 10000
+        },
+        "warnings": ["Using legacy protocol, consider migration"]
+      },
+      {
+        "id": "smart-meter-01",
+        "name": "Smart Meter API",
+        "type": "meter",
+        "status": "disconnected",
+        "health": "unhealthy",
+        "lastSync": "2025-01-18T14:20:00Z",
+        "endpoint": "https://metering.utility.com/api",
+        "apiKey": "***hidden***",
+        "dataSources": ["consumption", "cost"],
+        "syncInterval": 3600,
+        "errors": ["Connection timeout", "API key expired"]
+      }
+    ],
+    "connectionHealth": {
+      "total": 3,
+      "connected": 2,
+      "disconnected": 1,
+      "healthy": 1,
+      "warning": 1,
+      "unhealthy": 1
+    }
+  },
+  // Deployment Configuration
+  "deploymentConfiguration": {
+    "mode": "self-hosted",
+    "networkAccess": {
+      "type": "isolated",
+      "externalApiAccess": false,
+      "dataFlow": "local_only"
+    },
+    "dataStorage": {
+      "location": "local",
+      "backupEnabled": true,
+      "retentionDays": 365
+    },
+    "security": {
+      "encryption": "enabled",
+      "accessControl": "strict",
+      "auditLogging": true
+    },
+    "availableModes": [
+      {
+        "id": "cloud",
+        "name": "Cloud Deployment",
+        "description": "Hosted in cloud with external API access"
+      },
+      {
+        "id": "self-hosted",
+        "name": "Self-Hosted",
+        "description": "On-premise deployment with full control"
+      },
+      {
+        "id": "isolated",
+        "name": "Isolated Deployment",
+        "description": "Air-gapped deployment with no external access"
+      }
+    ]
+  },
   "weatherData": {
     "current": {
       "location": "Lisboa, Portugal",
@@ -566,8 +1072,9 @@ const appData = {
     }
   },
   // Temperature Monitoring Data
-  "temperatureMonitoring": {
-    "sensors": [
+  // Complete Sensor Integration - Temperature, Humidity, and Leak Detection
+  "sensorMonitoring": {
+    "temperatureSensors": [
       {
         "id": "temp-01",
         "location": "Server Room A",
@@ -601,6 +1108,72 @@ const appData = {
         "lastUpdate": "2025-01-19T10:09:00Z"
       }
     ],
+    "humiditySensors": [
+      {
+        "id": "humidity-01",
+        "location": "Server Room A",
+        "currentHumidity": 45.2,
+        "optimalRange": [40, 60],
+        "status": "optimal",
+        "lastUpdate": "2025-01-19T10:09:00Z"
+      },
+      {
+        "id": "humidity-02",
+        "location": "Server Room B",
+        "currentHumidity": 38.5,
+        "optimalRange": [40, 60],
+        "status": "warning",
+        "lastUpdate": "2025-01-19T10:09:00Z"
+      },
+      {
+        "id": "humidity-03",
+        "location": "HVAC Zone 1",
+        "currentHumidity": 52.8,
+        "optimalRange": [40, 60],
+        "status": "optimal",
+        "lastUpdate": "2025-01-19T10:09:00Z"
+      },
+      {
+        "id": "humidity-04",
+        "location": "HVAC Zone 2",
+        "currentHumidity": 65.3,
+        "optimalRange": [40, 60],
+        "status": "critical",
+        "lastUpdate": "2025-01-19T10:09:00Z"
+      }
+    ],
+    "leakDetectionSensors": [
+      {
+        "id": "leak-01",
+        "location": "Server Room A - Under Floor",
+        "status": "normal",
+        "lastDetection": null,
+        "lastUpdate": "2025-01-19T10:09:00Z"
+      },
+      {
+        "id": "leak-02",
+        "location": "Server Room B - Near Cooling Unit",
+        "status": "alert",
+        "lastDetection": "2025-01-19T09:15:00Z",
+        "lastUpdate": "2025-01-19T10:09:00Z",
+        "alert": "Moisture detected - Low level alert"
+      },
+      {
+        "id": "leak-03",
+        "location": "HVAC Zone 1 - Drainage Area",
+        "status": "normal",
+        "lastDetection": null,
+        "lastUpdate": "2025-01-19T10:09:00Z"
+      },
+      {
+        "id": "leak-04",
+        "location": "HVAC Zone 2 - Pipe Junction",
+        "status": "critical",
+        "lastDetection": "2025-01-19T10:05:00Z",
+        "lastUpdate": "2025-01-19T10:09:00Z",
+        "alert": "Water detected - Immediate attention required"
+      }
+    ],
     "coolingSystemRecommendations": [
       {
         "id": 1,
@@ -630,22 +1203,42 @@ const appData = {
       }
     ],
     "historicalData": {
-      "24hours": [
-        { "time": "00:00", "avgTemp": 21.2, "energyConsumption": 1450 },
-        { "time": "06:00", "avgTemp": 20.8, "energyConsumption": 1380 },
-        { "time": "12:00", "avgTemp": 23.5, "energyConsumption": 1650 },
-        { "time": "18:00", "avgTemp": 25.1, "energyConsumption": 1820 },
-        { "time": "24:00", "avgTemp": 22.3, "energyConsumption": 1520 }
-      ],
-      "7days": [
-        { "day": "Mon", "avgTemp": 22.1, "energyConsumption": 15800 },
-        { "day": "Tue", "avgTemp": 23.4, "energyConsumption": 17200 },
-        { "day": "Wed", "avgTemp": 24.2, "energyConsumption": 18100 },
-        { "day": "Thu", "avgTemp": 23.8, "energyConsumption": 17500 },
-        { "day": "Fri", "avgTemp": 22.9, "energyConsumption": 16800 },
-        { "day": "Sat", "avgTemp": 21.5, "energyConsumption": 15200 },
-        { "day": "Sun", "avgTemp": 21.0, "energyConsumption": 14800 }
-      ]
+      "temperature": {
+        "24hours": [
+          { "time": "00:00", "avgTemp": 21.2, "energyConsumption": 1450 },
+          { "time": "06:00", "avgTemp": 20.8, "energyConsumption": 1380 },
+          { "time": "12:00", "avgTemp": 23.5, "energyConsumption": 1650 },
+          { "time": "18:00", "avgTemp": 25.1, "energyConsumption": 1820 },
+          { "time": "24:00", "avgTemp": 22.3, "energyConsumption": 1520 }
+        ],
+        "7days": [
+          { "day": "Mon", "avgTemp": 22.1, "energyConsumption": 15800 },
+          { "day": "Tue", "avgTemp": 23.4, "energyConsumption": 17200 },
+          { "day": "Wed", "avgTemp": 24.2, "energyConsumption": 18100 },
+          { "day": "Thu", "avgTemp": 23.8, "energyConsumption": 17500 },
+          { "day": "Fri", "avgTemp": 22.9, "energyConsumption": 16800 },
+          { "day": "Sat", "avgTemp": 21.5, "energyConsumption": 15200 },
+          { "day": "Sun", "avgTemp": 21.0, "energyConsumption": 14800 }
+        ]
+      },
+      "humidity": {
+        "24hours": [
+          { "time": "00:00", "avgHumidity": 48.2 },
+          { "time": "06:00", "avgHumidity": 45.8 },
+          { "time": "12:00", "avgHumidity": 52.5 },
+          { "time": "18:00", "avgHumidity": 58.1 },
+          { "time": "24:00", "avgHumidity": 50.3 }
+        ],
+        "7days": [
+          { "day": "Mon", "avgHumidity": 49.1 },
+          { "day": "Tue", "avgHumidity": 51.4 },
+          { "day": "Wed", "avgHumidity": 53.2 },
+          { "day": "Thu", "avgHumidity": 52.8 },
+          { "day": "Fri", "avgHumidity": 50.9 },
+          { "day": "Sat", "avgHumidity": 48.5 },
+          { "day": "Sun", "avgHumidity": 47.0 }
+        ]
+      }
     }
   },
   // Enhanced Battery & Storage Management
@@ -810,7 +1403,7 @@ const appData = {
         "id": "custom-01",
         "name": "Energy vs Temperature Correlation",
         "type": "scatter",
-        "dataSource": "temperatureMonitoring.historicalData",
+        "dataSource": "sensorMonitoring.historicalData.temperature",
         "xAxis": "temperature",
         "yAxis": "energyConsumption"
       }
@@ -917,6 +1510,17 @@ document.addEventListener('DOMContentLoaded', function() {
       renderUserProfile();
       renderCustomGraphs();
       renderThresholdsConfig();
+      
+      // New feature rendering
+      renderDataCenterContext();
+      renderGranularMonitoring();
+      renderIntegrationManagement();
+      renderESGCompliance();
+      renderForecastReliability();
+      renderEnhancedContractManagement();
+      renderDeploymentConfiguration();
+      initSensorTabs();
+      
       translatePage();
       setupNotifications();
       
@@ -1167,8 +1771,21 @@ function switchTab(tabId) {
             renderWorkload();
           } else if (tabId === 'user-profile') {
             renderUserProfile();
+            renderDeploymentConfiguration();
           } else if (tabId === 'reports') {
             updateSavingsProjection();
+            renderForecastReliability();
+            renderESGCompliance();
+          } else if (tabId === 'granular-monitoring') {
+            renderGranularMonitoring();
+          } else if (tabId === 'integrations') {
+            renderIntegrationManagement();
+          } else if (tabId === 'temperature') {
+            renderTemperatureMonitoring();
+            initSensorTabs();
+          } else if (tabId === 'contracts') {
+            renderContracts();
+            renderEnhancedContractManagement();
           } else if (tabId === 'sustainability') {
             renderSustainability();
             setTimeout(() => {
@@ -1495,6 +2112,9 @@ function updateSavingsProjection() {
         `;
       }).join('');
     }
+    
+    // Update forecast reliability indicator
+    renderForecastReliability();
     
     console.log('Savings projection updated successfully');
   } catch (error) {
@@ -2170,8 +2790,6 @@ function renderTaskCards() {
         
         <div class="task-actions">
           <button class="btn btn--sm btn--outline">Details</button>
-          ${task.status === 'Running' ? '<button class="btn btn--sm btn--secondary">Pause</button>' : ''}
-          ${task.status === 'Queued' ? '<button class="btn btn--sm btn--primary">Start</button>' : ''}
         </div>
       </div>
     `).join('');
@@ -2231,13 +2849,6 @@ function renderWorkloadRecommendations() {
 }
 
 // AI Recommendation action handlers
-function implementRecommendation(recId) {
-  showLoading();
-  setTimeout(() => {
-    hideLoading();
-    showToast(`Recommendation ${recId} implementation started`);
-  }, 1500);
-}
 
 function learnMoreRecommendation(recId) {
   const rec = appData.workload.aiRecommendations.find(r => r.id === recId);
@@ -2912,7 +3523,7 @@ function renderTemperatureSensors() {
   if (!sensorsGrid) return;
   
   try {
-    const sensors = appData.temperatureMonitoring.sensors;
+    const sensors = appData.sensorMonitoring.temperatureSensors;
     
     sensorsGrid.innerHTML = sensors.map(sensor => {
       const statusClass = sensor.status === 'optimal' ? 'optimal' : 
@@ -2958,7 +3569,7 @@ function renderTemperatureHistoryChart() {
   if (!ctx) return;
   
   try {
-    const historyData = appData.temperatureMonitoring.historicalData['24hours'];
+    const historyData = appData.sensorMonitoring.historicalData.temperature['24hours'];
     
     if (charts.temperatureHistory) {
       charts.temperatureHistory.destroy();
@@ -3032,7 +3643,7 @@ function renderCoolingRecommendations() {
   if (!recommendationsGrid) return;
   
   try {
-    const recommendations = appData.temperatureMonitoring.coolingSystemRecommendations;
+    const recommendations = appData.sensorMonitoring.coolingSystemRecommendations;
     
     recommendationsGrid.innerHTML = recommendations.map(rec => {
       const priorityClass = rec.priority === 'high' ? 'high' : 'medium';
@@ -3239,7 +3850,6 @@ function renderBatteryRecommendations() {
             </div>
           </div>
           <div class="recommendation-actions">
-            <button class="btn btn--primary btn--sm">Implement</button>
             <button class="btn btn--outline btn--sm">Details</button>
           </div>
         </div>
@@ -3381,7 +3991,7 @@ function renderCustomGraphsBuilder() {
         <div class="form-group">
           <label class="form-label">Data Source</label>
           <select class="form-control" id="customGraphDataSource">
-            <option value="temperatureMonitoring.historicalData">Temperature & Energy</option>
+            <option value="sensorMonitoring.historicalData.temperature">Temperature & Energy</option>
             <option value="timeBasedData">Time-based Data</option>
             <option value="co2Emissions">CO2 Emissions</option>
             <option value="batteryManagement">Battery Management</option>
@@ -3572,4 +4182,677 @@ function resetThresholdsConfig() {
     hideLoading();
     showToast('Thresholds reset to default values');
   }, 800);
+}
+
+// Data Center Context Indicator
+function renderDataCenterContext() {
+  const contextDiv = document.getElementById('dataCenterContext');
+  if (!contextDiv) return;
+  
+  try {
+    const currentSite = appData.dataCenterContext.currentSite;
+    contextDiv.innerHTML = `
+      <div class="data-center-badge">
+        <span class="site-name">${currentSite.name}</span>
+        <span class="subdivision-name">${currentSite.subdivision.name}</span>
+      </div>
+    `;
+  } catch (error) {
+    console.error('Error rendering data center context:', error);
+  }
+}
+
+// Granular Consumption Monitoring
+function renderGranularMonitoring() {
+  const zonesGrid = document.getElementById('zonesGrid');
+  if (!zonesGrid) return;
+  
+  try {
+    const zones = appData.granularConsumption.zones;
+    
+    zonesGrid.innerHTML = zones.map(zone => `
+      <div class="zone-card" data-zone-id="${zone.id}">
+        <div class="zone-header">
+          <h3>${zone.name}</h3>
+          <span class="zone-type">${zone.type.replace('_', ' ')}</span>
+        </div>
+        <div class="zone-metrics">
+          <div class="zone-metric">
+            <span class="metric-label">Total Consumption</span>
+            <span class="metric-value">${zone.totalConsumption} kW</span>
+          </div>
+          <div class="zone-metric">
+            <span class="metric-label">Machines</span>
+            <span class="metric-value">${zone.machines.length}</span>
+          </div>
+          <div class="zone-metric">
+            <span class="metric-label">Groups</span>
+            <span class="metric-value">${zone.groups.length}</span>
+          </div>
+        </div>
+        <div class="zone-actions">
+          <button class="btn btn--outline btn--sm" onclick="showZoneDetails('${zone.id}')">
+            <span>View Details</span>
+          </button>
+        </div>
+      </div>
+    `).join('');
+  } catch (error) {
+    console.error('Error rendering granular monitoring:', error);
+  }
+}
+
+function showZoneDetails(zoneId) {
+  const zone = appData.granularConsumption.zones.find(z => z.id === zoneId);
+  if (!zone) return;
+  
+  const detailsCard = document.getElementById('granularDetailsCard');
+  if (!detailsCard) return;
+  
+  detailsCard.classList.remove('hidden');
+  detailsCard.innerHTML = `
+    <div class="details-header">
+      <h3>${zone.name} - Detailed Breakdown</h3>
+      <button class="btn-close" onclick="document.getElementById('granularDetailsCard').classList.add('hidden')">×</button>
+    </div>
+    <div class="details-content">
+      <div class="machines-section">
+        <h4>Machines & Outlets</h4>
+        ${zone.machines.map(machine => `
+          <div class="machine-card">
+            <div class="machine-header">
+              <h5>${machine.name}</h5>
+              <span class="machine-consumption">${machine.consumption} kW</span>
+            </div>
+            <div class="outlets-list">
+              ${machine.outlets.map(outlet => `
+                <div class="outlet-item">
+                  <span>${outlet.name}</span>
+                  <span>${outlet.consumption} kW</span>
+                  <span class="status-badge status-${outlet.status}">${outlet.status}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="groups-section">
+        <h4>Groups</h4>
+        ${zone.groups.map(group => `
+          <div class="group-card">
+            <h5>${group.name}</h5>
+            <span>${group.consumption} kW</span>
+            <span class="group-type">${group.type}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// Humidity and Leak Detection Sensors
+function renderHumiditySensors() {
+  const sensorsGrid = document.getElementById('humiditySensorsGrid');
+  if (!sensorsGrid) return;
+  
+  try {
+    const sensors = appData.sensorMonitoring.humiditySensors;
+    
+    sensorsGrid.innerHTML = sensors.map(sensor => {
+      const statusClass = sensor.status === 'optimal' ? 'optimal' : 
+                          sensor.status === 'warning' ? 'warning' : 'critical';
+      const statusIcon = sensor.status === 'optimal' ? '✅' : 
+                         sensor.status === 'warning' ? '⚠️' : '🔴';
+      
+      return `
+        <div class="temperature-sensor-card status-${statusClass}">
+          <div class="sensor-header">
+            <div class="sensor-icon">💧</div>
+            <div class="sensor-info">
+              <h4>${sensor.location}</h4>
+              <span class="sensor-status ${statusClass}">${statusIcon} ${sensor.status}</span>
+            </div>
+          </div>
+          <div class="sensor-metrics">
+            <div class="sensor-metric">
+              <span class="sensor-label">Current Humidity</span>
+              <span class="sensor-value">${sensor.currentHumidity}%</span>
+            </div>
+            <div class="sensor-metric">
+              <span class="sensor-label">Optimal Range</span>
+              <span class="sensor-value">${sensor.optimalRange[0]}% - ${sensor.optimalRange[1]}%</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } catch (error) {
+    console.error('Error rendering humidity sensors:', error);
+  }
+}
+
+function renderLeakDetectionSensors() {
+  const sensorsGrid = document.getElementById('leakSensorsGrid');
+  if (!sensorsGrid) return;
+  
+  try {
+    const sensors = appData.sensorMonitoring.leakDetectionSensors;
+    
+    sensorsGrid.innerHTML = sensors.map(sensor => {
+      const statusClass = sensor.status === 'normal' ? 'optimal' : 
+                          sensor.status === 'alert' ? 'warning' : 'critical';
+      const statusIcon = sensor.status === 'normal' ? '✅' : 
+                         sensor.status === 'alert' ? '⚠️' : '🚨';
+      
+      return `
+        <div class="temperature-sensor-card status-${statusClass}">
+          <div class="sensor-header">
+            <div class="sensor-icon">🚨</div>
+            <div class="sensor-info">
+              <h4>${sensor.location}</h4>
+              <span class="sensor-status ${statusClass}">${statusIcon} ${sensor.status}</span>
+            </div>
+          </div>
+          <div class="sensor-metrics">
+            ${sensor.lastDetection ? `
+              <div class="sensor-metric">
+                <span class="sensor-label">Last Detection</span>
+                <span class="sensor-value">${new Date(sensor.lastDetection).toLocaleString()}</span>
+              </div>
+            ` : ''}
+            ${sensor.alert ? `
+              <div class="sensor-alert">
+                <span class="alert-icon">⚠️</span>
+                <span class="alert-text">${sensor.alert}</span>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+  } catch (error) {
+    console.error('Error rendering leak detection sensors:', error);
+  }
+}
+
+// Enhanced Sensor Monitoring with tabs
+function initSensorTabs() {
+  const sensorTabBtns = document.querySelectorAll('.sensor-tab-btn');
+  sensorTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sensorTabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const sensorType = btn.dataset.sensorType;
+      
+      // Hide all grids
+      document.getElementById('temperatureSensorsGrid').classList.add('hidden');
+      document.getElementById('humiditySensorsGrid').classList.add('hidden');
+      document.getElementById('leakSensorsGrid').classList.add('hidden');
+      
+      // Show selected grid
+      if (sensorType === 'temperature') {
+        document.getElementById('temperatureSensorsGrid').classList.remove('hidden');
+      } else if (sensorType === 'humidity') {
+        document.getElementById('humiditySensorsGrid').classList.remove('hidden');
+        renderHumiditySensors();
+      } else if (sensorType === 'leak') {
+        document.getElementById('leakSensorsGrid').classList.remove('hidden');
+        renderLeakDetectionSensors();
+      }
+    });
+  });
+}
+
+// Forecast Reliability Indicators
+function renderForecastReliability() {
+  const indicatorDiv = document.getElementById('forecastReliabilityIndicator');
+  if (!indicatorDiv) return;
+  
+  try {
+    const activeRange = document.querySelector('.time-range-btn.active')?.dataset.range || '1month';
+    const projection = appData.savingsProjections[activeRange];
+    if (!projection || !projection.forecastReliability) return;
+    
+    const reliability = projection.forecastReliability;
+    const reliabilityClass = reliability.status === 'reliable' ? 'reliable' : 
+                            reliability.status === 'moderate' ? 'moderate' : 'unreliable';
+    
+    indicatorDiv.innerHTML = `
+      <div class="reliability-indicator ${reliabilityClass}">
+        <div class="reliability-header">
+          <span class="reliability-icon">${reliability.status === 'reliable' ? '✅' : reliability.status === 'moderate' ? '⚠️' : '⚠️'}</span>
+          <span class="reliability-label">Forecast Reliability</span>
+          <span class="reliability-confidence">${reliability.confidence}%</span>
+        </div>
+        ${reliability.warning ? `
+          <div class="reliability-warning">
+            <span class="warning-icon">⚠️</span>
+            <span class="warning-text">${reliability.warning}</span>
+          </div>
+        ` : ''}
+        <div class="reliability-method">
+          <span class="method-label">Method:</span>
+          <span class="method-value">${reliability.method.replace('_', ' ')}</span>
+        </div>
+      </div>
+    `;
+  } catch (error) {
+    console.error('Error rendering forecast reliability:', error);
+  }
+}
+
+// ESG Compliance Reporting
+function renderESGCompliance() {
+  const templatesGrid = document.getElementById('esgTemplatesGrid');
+  const checklistDiv = document.getElementById('complianceChecklist');
+  
+  if (templatesGrid) {
+    try {
+      const templates = appData.esgCompliance.reportTemplates;
+      templatesGrid.innerHTML = templates.map(template => `
+        <div class="esg-template-card">
+          <h4>${template.name}</h4>
+          <p class="template-type">${template.type}</p>
+          <div class="template-suitable">
+            <span>Suitable for:</span>
+            ${template.suitableFor.map(purpose => `<span class="purpose-tag">${purpose.replace('_', ' ')}</span>`).join('')}
+          </div>
+          <button class="btn btn--primary btn--sm" onclick="generateESGReport('${template.id}')">
+            <span>Generate Report</span>
+          </button>
+        </div>
+      `).join('');
+    } catch (error) {
+      console.error('Error rendering ESG templates:', error);
+    }
+  }
+  
+  if (checklistDiv) {
+    try {
+      const checklist = appData.esgCompliance.complianceChecklist;
+      checklistDiv.innerHTML = `
+        <div class="checklist-section">
+          <h4>Regulatory Compliance</h4>
+          <ul>
+            ${Object.entries(checklist.regulatory).map(([key, value]) => `
+              <li>
+                <span class="check-icon">${value ? '✅' : '❌'}</span>
+                <span>${key.replace('_', ' ').toUpperCase()}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        <div class="checklist-section">
+          <h4>Certifications</h4>
+          <ul>
+            ${Object.entries(checklist.certifications).map(([key, value]) => `
+              <li>
+                <span class="check-icon">${value ? '✅' : '❌'}</span>
+                <span>${key.replace('_', ' ').toUpperCase()}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        <div class="checklist-section">
+          <h4>Data Verification</h4>
+          <ul>
+            ${Object.entries(checklist.data_verification).map(([key, value]) => `
+              <li>
+                <span class="check-icon">${value ? '✅' : '❌'}</span>
+                <span>${key.replace('_', ' ')}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `;
+    } catch (error) {
+      console.error('Error rendering compliance checklist:', error);
+    }
+  }
+}
+
+function generateESGReport(templateId) {
+  showLoading();
+  setTimeout(() => {
+    hideLoading();
+    showToast(`ESG Report ${templateId} generated successfully`);
+  }, 2000);
+}
+
+// Integration Management
+function renderIntegrationManagement() {
+  const healthSummary = document.getElementById('integrationHealthSummary');
+  const integrationsGrid = document.getElementById('integrationsGrid');
+  
+  if (healthSummary) {
+    try {
+      const health = appData.integrationManagement.connectionHealth;
+      healthSummary.innerHTML = `
+        <div class="health-metric">
+          <span class="health-label">Total Integrations</span>
+          <span class="health-value">${health.total}</span>
+        </div>
+        <div class="health-metric healthy">
+          <span class="health-label">Connected</span>
+          <span class="health-value">${health.connected}</span>
+        </div>
+        <div class="health-metric warning">
+          <span class="health-label">Warning</span>
+          <span class="health-value">${health.warning}</span>
+        </div>
+        <div class="health-metric unhealthy">
+          <span class="health-label">Unhealthy</span>
+          <span class="health-value">${health.unhealthy}</span>
+        </div>
+      `;
+    } catch (error) {
+      console.error('Error rendering integration health:', error);
+    }
+  }
+  
+  if (integrationsGrid) {
+    try {
+      const integrations = appData.integrationManagement.integrations;
+      integrationsGrid.innerHTML = integrations.map(integration => {
+        const healthClass = integration.health === 'healthy' ? 'healthy' : 
+                           integration.health === 'warning' ? 'warning' : 'unhealthy';
+        const statusIcon = integration.status === 'connected' ? '✅' : '❌';
+        
+        return `
+          <div class="integration-card ${healthClass}">
+            <div class="integration-header">
+              <h4>${integration.name}</h4>
+              <span class="integration-status ${integration.status}">${statusIcon} ${integration.status}</span>
+            </div>
+            <div class="integration-details">
+              <div class="detail-item">
+                <span class="detail-label">Type:</span>
+                <span class="detail-value">${integration.type.toUpperCase()}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Health:</span>
+                <span class="detail-value ${healthClass}">${integration.health}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Last Sync:</span>
+                <span class="detail-value">${new Date(integration.lastSync).toLocaleString()}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Data Sources:</span>
+                <span class="detail-value">${integration.dataSources.join(', ')}</span>
+              </div>
+              ${integration.warnings ? `
+                <div class="integration-warnings">
+                  ${integration.warnings.map(w => `<span class="warning-badge">⚠️ ${w}</span>`).join('')}
+                </div>
+              ` : ''}
+              ${integration.errors ? `
+                <div class="integration-errors">
+                  ${integration.errors.map(e => `<span class="error-badge">❌ ${e}</span>`).join('')}
+                </div>
+              ` : ''}
+            </div>
+            <div class="integration-actions">
+              <button class="btn btn--outline btn--sm" onclick="editIntegration('${integration.id}')">
+                <span>Edit</span>
+              </button>
+              <button class="btn btn--outline btn--sm" onclick="testIntegration('${integration.id}')">
+                <span>Test</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    } catch (error) {
+      console.error('Error rendering integrations:', error);
+    }
+  }
+}
+
+function editIntegration(integrationId) {
+  showToast(`Editing integration ${integrationId}`);
+}
+
+function testIntegration(integrationId) {
+  showLoading();
+  setTimeout(() => {
+    hideLoading();
+    showToast(`Integration ${integrationId} test completed`);
+  }, 2000);
+}
+
+// Enhanced Contract Management
+function renderEnhancedContractManagement() {
+  renderContractLockinRisk();
+  renderContractCriteria();
+  renderContractNegotiations();
+}
+
+function renderContractLockinRisk() {
+  const div = document.getElementById('contractLockinRisk');
+  if (!div) return;
+  
+  try {
+    const contracts = appData.enhancedContractManagement.currentContracts;
+    div.innerHTML = contracts.map(contract => `
+      <div class="contract-card">
+        <div class="contract-header">
+          <h4>${contract.provider}</h4>
+          <span class="contract-type">${contract.type}</span>
+        </div>
+        ${contract.lockInPeriod.enabled ? `
+          <div class="lockin-period ${contract.lockInPeriod.daysRemaining < 90 ? 'warning' : ''}">
+            <div class="lockin-header">
+              <span class="lockin-label">Lock-in Period</span>
+              <span class="lockin-days">${contract.lockInPeriod.daysRemaining} days remaining</span>
+            </div>
+            <div class="lockin-details">
+              <span>Ends: ${new Date(contract.lockInPeriod.endDate).toLocaleDateString()}</span>
+              <span>Early Termination Fee: €${contract.lockInPeriod.earlyTerminationFee.toLocaleString()}</span>
+            </div>
+            ${contract.lockInPeriod.warning ? `
+              <div class="lockin-warning">⚠️ ${contract.lockInPeriod.warning}</div>
+            ` : ''}
+          </div>
+        ` : ''}
+        <div class="risk-profile">
+          <h5>Risk Profile</h5>
+          <div class="risk-scores">
+            ${Object.entries(contract.riskProfile).filter(([key]) => key !== 'overall').map(([key, value]) => {
+              const label = key.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+              const displayValue = value.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+              const valueClass = value.includes('very_low') ? 'very-low' :
+                                value === 'low' ? 'low' :
+                                value === 'medium' ? 'medium' :
+                                value === 'high' ? 'high' : value.replace(/_/g, '-');
+              return `
+              <div class="risk-score">
+                <span class="risk-label">${label}</span>
+                <span class="risk-value risk-${valueClass}">${displayValue}</span>
+              </div>
+            `;
+            }).join('')}
+            <div class="risk-score overall">
+              <span class="risk-label">Overall</span>
+              <span class="risk-value risk-${contract.riskProfile.overall}">${contract.riskProfile.overall.charAt(0).toUpperCase() + contract.riskProfile.overall.slice(1)}</span>
+            </div>
+          </div>
+        </div>
+        <div class="vendor-risk">
+          <h5>Vendor Risk Profile</h5>
+          <div class="vendor-details">
+            <span>Credit Rating: ${contract.vendorRiskProfile.creditRating}</span>
+            <span>Risk Score: ${contract.vendorRiskProfile.riskScore}/100</span>
+            <span>Market Position: ${contract.vendorRiskProfile.marketPosition}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } catch (error) {
+    console.error('Error rendering contract lock-in and risk:', error);
+  }
+}
+
+function renderContractCriteria() {
+  const div = document.getElementById('contractCriteriaBuilder');
+  if (!div) return;
+  
+  try {
+    const criteria = appData.enhancedContractManagement.contractCriteria;
+    div.innerHTML = `
+      <div class="criteria-form">
+        <div class="form-group">
+          <label>Max MW</label>
+          <input type="number" class="form-control" value="${criteria.maxMW.min}" min="${criteria.maxMW.min}" max="${criteria.maxMW.max}">
+          <span>Preferred: ${criteria.maxMW.preferred}</span>
+        </div>
+        <div class="form-group">
+          <label>Renewable %</label>
+          <input type="number" class="form-control" value="${criteria.renewablePercent.min}" min="${criteria.renewablePercent.min}" max="${criteria.renewablePercent.max}">
+          <span>Preferred: ${criteria.renewablePercent.preferred}%</span>
+        </div>
+        <div class="form-group">
+          <label>Max Price per kWh</label>
+          <input type="number" step="0.001" class="form-control" value="${criteria.pricePerKWh.max}">
+          <span>Preferred: €${criteria.pricePerKWh.preferred}</span>
+        </div>
+        <div class="form-group">
+          <label>Reliability</label>
+          <input type="number" class="form-control" value="${criteria.reliability.min}" min="0" max="100">
+          <span>Preferred: ${criteria.reliability.preferred}%</span>
+        </div>
+        <div class="form-group">
+          <label>Sustainability Certifications</label>
+          <div class="certifications-list">
+            ${criteria.sustainabilityCertifications.map(cert => `
+              <label><input type="checkbox" checked> ${cert}</label>
+            `).join('')}
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Max Vendor Risk Score</label>
+          <input type="number" class="form-control" value="${criteria.vendorRiskMax}">
+        </div>
+        <div class="form-group">
+          <label>Lock-in Period</label>
+          <input type="number" class="form-control" value="${criteria.lockInPeriod.maxDays}" max="${criteria.lockInPeriod.maxDays}">
+          <span>Preferred: ${criteria.lockInPeriod.preferredDays} days</span>
+        </div>
+        <button class="btn btn--primary" onclick="saveContractCriteria()">Save Criteria</button>
+      </div>
+    `;
+  } catch (error) {
+    console.error('Error rendering contract criteria:', error);
+  }
+}
+
+function saveContractCriteria() {
+  showToast('Contract criteria saved successfully');
+}
+
+function renderContractNegotiations() {
+  const div = document.getElementById('contractNegotiations');
+  if (!div) return;
+  
+  try {
+    const negotiations = appData.enhancedContractManagement.contractNegotiations;
+    div.innerHTML = negotiations.map(negotiation => `
+      <div class="negotiation-card">
+        <div class="negotiation-header">
+          <h4>${negotiation.provider}</h4>
+          <span class="negotiation-status ${negotiation.status}">${negotiation.status.replace('_', ' ')}</span>
+        </div>
+        <div class="negotiation-details">
+          <span>Started: ${new Date(negotiation.startDate).toLocaleDateString()}</span>
+          <span>Last Update: ${new Date(negotiation.lastUpdate).toLocaleDateString()}</span>
+        </div>
+        <div class="negotiation-proposals">
+          <h5>Proposals</h5>
+          ${negotiation.proposals.map(proposal => `
+            <div class="proposal-item">
+              <span class="proposal-date">${new Date(proposal.date).toLocaleDateString()}</span>
+              <span class="proposal-type">${proposal.type}</span>
+              <p>${proposal.details}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  } catch (error) {
+    console.error('Error rendering contract negotiations:', error);
+  }
+}
+
+// Deployment Configuration
+function renderDeploymentConfiguration() {
+  const div = document.getElementById('deploymentConfigContent');
+  if (!div) return;
+  
+  try {
+    const config = appData.deploymentConfiguration;
+    div.innerHTML = `
+      <div class="deployment-config-form">
+        <div class="form-group">
+          <label>Deployment Mode</label>
+          <select class="form-control" id="deploymentMode">
+            ${config.availableModes.map(mode => `
+              <option value="${mode.id}" ${mode.id === config.mode ? 'selected' : ''}>${mode.name}</option>
+            `).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Network Access</label>
+          <select class="form-control" id="networkAccess">
+            <option value="isolated" ${config.networkAccess.type === 'isolated' ? 'selected' : ''}>Isolated</option>
+            <option value="limited" ${config.networkAccess.type === 'limited' ? 'selected' : ''}>Limited</option>
+            <option value="full" ${config.networkAccess.type === 'full' ? 'selected' : ''}>Full</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" ${config.networkAccess.externalApiAccess ? 'checked' : ''}> 
+            External API Access
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Data Storage Location</label>
+          <select class="form-control" id="dataStorageLocation">
+            <option value="local" ${config.dataStorage.location === 'local' ? 'selected' : ''}>Local</option>
+            <option value="cloud" ${config.dataStorage.location === 'cloud' ? 'selected' : ''}>Cloud</option>
+            <option value="hybrid" ${config.dataStorage.location === 'hybrid' ? 'selected' : ''}>Hybrid</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" ${config.dataStorage.backupEnabled ? 'checked' : ''}> 
+            Backup Enabled
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Data Retention (days)</label>
+          <input type="number" class="form-control" value="${config.dataStorage.retentionDays}">
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" ${config.security.encryption === 'enabled' ? 'checked' : ''}> 
+            Encryption Enabled
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" ${config.security.auditLogging ? 'checked' : ''}> 
+            Audit Logging
+          </label>
+        </div>
+        <button class="btn btn--primary" onclick="saveDeploymentConfiguration()">Save Configuration</button>
+      </div>
+    `;
+  } catch (error) {
+    console.error('Error rendering deployment configuration:', error);
+  }
+}
+
+function saveDeploymentConfiguration() {
+  showToast('Deployment configuration saved successfully');
 }

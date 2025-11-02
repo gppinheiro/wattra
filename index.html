@@ -15,6 +15,10 @@
             <div class="nav-brand">
                 <img src="wattra.svg" alt="Wattra" class="logo-img" />
             </div>
+            <!-- Data Center Context Indicator -->
+            <div class="data-center-context" id="dataCenterContext">
+                <!-- Will be populated by JavaScript -->
+            </div>
             <div class="nav-right">
                 <div class="language-selector">
                     <button class="lang-btn active" data-lang="en">
@@ -58,6 +62,14 @@
             <button class="sidebar-nav-item" data-tab="temperature" data-i18n="temperature" title="Temperature">
                 <span class="nav-icon">🌡️</span>
                 <span class="nav-text">Temperature</span>
+            </button>
+            <button class="sidebar-nav-item" data-tab="granular-monitoring" data-i18n="granularMonitoring" title="Granular Monitoring">
+                <span class="nav-icon">🔌</span>
+                <span class="nav-text">Granular Monitoring</span>
+            </button>
+            <button class="sidebar-nav-item" data-tab="integrations" data-i18n="integrations" title="Integrations">
+                <span class="nav-icon">🔗</span>
+                <span class="nav-text">Integrations</span>
             </button>
             <button class="sidebar-nav-item" data-tab="workload" data-i18n="workload" title="Workload">
                 <span class="nav-icon">💻</span>
@@ -341,6 +353,34 @@
                     <p class="section-subtitle">Manage your energy supply contracts across Portugal and Spain markets</p>
                 </div>
 
+                <!-- Enhanced Contract Management -->
+                <div class="enhanced-contract-management">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Contract Lock-in & Risk Analysis</h3>
+                        </div>
+                        <div class="contract-lockin-risk" id="contractLockinRisk">
+                            <!-- Lock-in and risk info will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Advanced Contract Criteria</h3>
+                        </div>
+                        <div class="contract-criteria-builder" id="contractCriteriaBuilder">
+                            <!-- Contract criteria builder will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Contract Negotiations</h3>
+                        </div>
+                        <div class="contract-negotiations" id="contractNegotiations">
+                            <!-- Contract negotiations will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
                 <!-- ERSE Market Prices Section -->
                 <div class="erse-prices-section">
                     <div class="card">
@@ -609,6 +649,27 @@
                             <div class="savings-breakdown" id="savingsBreakdown">
                                 <!-- Breakdown will be populated by JavaScript -->
                             </div>
+                            
+                            <!-- Forecast Reliability Indicator -->
+                            <div class="forecast-reliability-indicator" id="forecastReliabilityIndicator">
+                                <!-- Reliability indicator will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ESG Compliance Reporting -->
+                <div class="esg-compliance-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>ESG Compliance Reporting</h3>
+                            <p>Generate regulatory compliance reports suitable for audits and stakeholder reporting</p>
+                        </div>
+                        <div class="esg-templates-grid" id="esgTemplatesGrid">
+                            <!-- ESG templates will be populated by JavaScript -->
+                        </div>
+                        <div class="compliance-checklist" id="complianceChecklist">
+                            <!-- Compliance checklist will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>
@@ -623,7 +684,10 @@
                                     <option value="savings">Savings Analysis Report</option>
                                     <option value="sustainability">Sustainability Report</option>
                                     <option value="energy">Energy Efficiency Report</option>
-                                    <option value="compliance">ESG Compliance Report</option>
+                                    <option value="esg-full">ESG Full Compliance Report</option>
+                                    <option value="esg-carbon">ESG Carbon Emissions Report</option>
+                                    <option value="esg-energy">ESG Energy Efficiency Report</option>
+                                    <option value="compliance">ESG Compliance Report (Legacy)</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -648,13 +712,30 @@
         <section class="tab-content" id="temperature-tab">
             <div class="temperature-layout">
                 <div class="section-header">
-                    <h2>Real-Time Temperature Monitoring</h2>
-                    <p class="section-subtitle">Monitor temperature behavior inside the data center with real-time insights</p>
+                    <h2>Complete Sensor Monitoring</h2>
+                    <p class="section-subtitle">Monitor temperature, humidity, and leak detection with real-time insights</p>
+                </div>
+
+                <!-- Sensor Type Tabs -->
+                <div class="sensor-type-tabs">
+                    <button class="sensor-tab-btn active" data-sensor-type="temperature">🌡️ Temperature</button>
+                    <button class="sensor-tab-btn" data-sensor-type="humidity">💧 Humidity</button>
+                    <button class="sensor-tab-btn" data-sensor-type="leak">🚨 Leak Detection</button>
                 </div>
 
                 <!-- Temperature Sensors Grid -->
                 <div class="temperature-sensors-grid" id="temperatureSensorsGrid">
                     <!-- Temperature sensors will be populated by JavaScript -->
+                </div>
+
+                <!-- Humidity Sensors Grid -->
+                <div class="humidity-sensors-grid hidden" id="humiditySensorsGrid">
+                    <!-- Humidity sensors will be populated by JavaScript -->
+                </div>
+
+                <!-- Leak Detection Sensors Grid -->
+                <div class="leak-sensors-grid hidden" id="leakSensorsGrid">
+                    <!-- Leak detection sensors will be populated by JavaScript -->
                 </div>
 
                 <!-- Temperature History Chart -->
@@ -682,6 +763,47 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Granular Monitoring Tab -->
+        <section class="tab-content" id="granular-monitoring-tab">
+            <div class="granular-monitoring-layout">
+                <div class="section-header">
+                    <h2>Granular Consumption Monitoring</h2>
+                    <p class="section-subtitle">Machine-level and outlet/group level consumption tracking with hierarchical breakdown</p>
+                </div>
+
+                <!-- Zones Overview -->
+                <div class="zones-grid" id="zonesGrid">
+                    <!-- Zones will be populated by JavaScript -->
+                </div>
+
+                <!-- Selected Zone/Machine Details -->
+                <div class="granular-details-card hidden" id="granularDetailsCard">
+                    <!-- Details will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Integrations Tab -->
+        <section class="tab-content" id="integrations-tab">
+            <div class="integrations-layout">
+                <div class="section-header">
+                    <h2>System Integrations</h2>
+                    <p class="section-subtitle">Manage API integrations with legacy systems and building management systems</p>
+                </div>
+
+                <!-- Integration Health Summary -->
+                <div class="integration-health-summary" id="integrationHealthSummary">
+                    <!-- Health summary will be populated by JavaScript -->
+                </div>
+
+                <!-- Integrations Grid -->
+                <div class="integrations-grid" id="integrationsGrid">
+                    <!-- Integrations will be populated by JavaScript -->
+                </div>
+
             </div>
         </section>
 
@@ -795,6 +917,19 @@
                         <div class="thresholds-actions">
                             <button class="btn btn--primary" id="saveThresholds">Save Thresholds</button>
                             <button class="btn btn--secondary" id="resetThresholds">Reset to Defaults</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deployment Configuration -->
+                <div class="deployment-config-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Deployment Configuration</h3>
+                            <p>Configure deployment mode, network access, and data storage preferences</p>
+                        </div>
+                        <div class="deployment-config-content" id="deploymentConfigContent">
+                            <!-- Deployment configuration will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>
