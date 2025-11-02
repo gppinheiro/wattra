@@ -151,8 +151,8 @@
                 <div class="kpi-card production">
                     <div class="kpi-icon">🔋</div>
                     <div class="kpi-content">
-                        <h3 data-i18n="currentProduction">Current Production</h3>
-                        <div class="kpi-value" id="currentProduction">1,956.3 kW</div>
+                        <h3 data-i18n="currentProduction">Production Accumulated</h3>
+                        <div class="kpi-value" id="currentProduction">1,956.3 kWh</div>
                         <div class="kpi-change positive" id="productionTrend">+8.4%</div>
                     </div>
                 </div>
@@ -178,31 +178,32 @@
             <div class="charts-grid">
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>Cost Breakdown Analysis</h3>
+                        <h3>Energy Efficiency Metrics</h3>
                         <div class="chart-controls">
                             <div class="chart-legend">
                                 <div class="legend-item">
                                     <span class="legend-color" style="background: #1FB8CD;"></span> 
-                                    <span>Energy</span>
+                                    <span>PUE (Power Usage Effectiveness)</span>
                                 </div>
                                 <div class="legend-item">
                                     <span class="legend-color" style="background: #FFC185;"></span> 
-                                    <span>Infrastructure</span>
+                                    <span>Efficiency Score (%)</span>
                                 </div>
                                 <div class="legend-item">
-                                    <span class="legend-color" style="background: #B4413C;"></span> 
-                                    <span>Maintenance</span>
+                                    <span class="legend-color" style="background: #34C759;"></span> 
+                                    <span>Renewable Energy %</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="chart-container" style="position: relative; height: 320px;">
-                        <canvas id="costBreakdownChart"></canvas>
+                        <canvas id="efficiencyMetricsChart"></canvas>
                     </div>
                 </div>
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>Energy Sources Distribution</h3>
+                        <h3>Energy Sources Distribution (Accumulated)</h3>
+                        <span class="chart-period-note" id="energySourcesPeriodNote">Period: Current View</span>
                     </div>
                     <div class="chart-container" style="position: relative; height: 320px;">
                         <canvas id="energyMixChart"></canvas>
@@ -475,7 +476,7 @@
                         </div>
                         <div class="optimization-metric">
                             <div class="metric-value">€53,208</div>
-                            <div class="metric-label">Yearly Projection</div>
+                            <div class="metric-label">Yearly Projection (12-Month Forecast)</div>
                         </div>
                         <div class="optimization-metric">
                             <div class="metric-value">24,700 kg</div>

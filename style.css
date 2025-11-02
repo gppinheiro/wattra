@@ -1198,6 +1198,14 @@ body {
   font-size: var(--font-size-xl);
 }
 
+.chart-period-note {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  margin-top: var(--space-4);
+  display: block;
+}
+
 .chart-controls {
   display: flex;
   align-items: center;

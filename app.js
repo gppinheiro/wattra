@@ -1499,6 +1499,7 @@ document.addEventListener('DOMContentLoaded', function() {
       initializeEventListeners();
       renderInitialData();
       renderCharts();
+      renderEfficiencyMetricsChart();
       renderContracts();
       renderSustainability();
       renderWorkload();
@@ -1880,6 +1881,8 @@ function switchTimeView(timeView) {
       try {
         updateKPICards();
         updateCharts();
+        renderEfficiencyMetricsChart();
+        renderEnergyMixChart();
         hideLoading();
         showToast(`Data updated for ${timeView} view`);
       } catch (error) {
@@ -1969,10 +1972,31 @@ function updateKPICards() {
   console.log(`Updating KPI cards for ${currentTimeView}:`, data);
   
   try {
+    // Calculate accumulated production based on current time view
+    let productionAccumulated = data.production;
+    let productionUnit = ' kWh';
+    if (currentTimeView === 'hourly') {
+      productionAccumulated = data.production; // kWh for hourly
+    } else if (currentTimeView === 'daily') {
+      productionAccumulated = data.production * 24; // Convert to daily kWh
+    } else if (currentTimeView === 'monthly') {
+      productionAccumulated = data.production * 24 * 30; // Approximate monthly kWh
+      if (productionAccumulated >= 1000) {
+        productionAccumulated = (productionAccumulated / 1000).toFixed(2);
+        productionUnit = ' MWh';
+      }
+    } else if (currentTimeView === 'yearly') {
+      productionAccumulated = data.production * 24 * 365; // Approximate yearly kWh
+      if (productionAccumulated >= 1000) {
+        productionAccumulated = (productionAccumulated / 1000).toFixed(2);
+        productionUnit = ' MWh';
+      }
+    }
+    
     animateValue('totalConsumption', data.consumption, '', true, ' kWh');
     animateValue('energyCost', data.cost, '€', true);
     animateValue('carbonEmissions', data.emissions, '', true, ' kg CO₂');
-    animateValue('currentProduction', data.production, '', true, ' kW');
+    animateValue('currentProduction', productionAccumulated, '', true, productionUnit);
     
     const pueElement = document.getElementById('pueValue');
     const efficiencyElement = document.getElementById('efficiencyScore');
@@ -2144,7 +2168,7 @@ function renderCharts() {
   console.log('Rendering enhanced charts...');
   
   try {
-    renderCostBreakdownChart();
+    renderEfficiencyMetricsChart();
     renderEnergyMixChart();
     renderSustainabilityForecastChart();
   } catch (error) {
@@ -2152,44 +2176,54 @@ function renderCharts() {
   }
 }
 
-// Cost Breakdown Chart
-function renderCostBreakdownChart() {
-  const ctx = document.getElementById('costBreakdownChart');
+// Energy Efficiency Metrics Chart
+function renderEfficiencyMetricsChart() {
+  const ctx = document.getElementById('efficiencyMetricsChart');
   if (!ctx) return;
   
   try {
-    if (charts.costBreakdown) {
-      charts.costBreakdown.destroy();
+    if (charts.efficiencyMetrics) {
+      charts.efficiencyMetrics.destroy();
     }
     
-    charts.costBreakdown = new Chart(ctx.getContext('2d'), {
+    const timeLabels = getTimeLabels();
+    const baseData = appData.timeBasedData[currentTimeView];
+    const pueData = timeLabels.map(() => baseData.pue + (Math.random() * 0.1 - 0.05));
+    const efficiencyData = timeLabels.map(() => baseData.efficiency + (Math.random() * 2 - 1));
+    const renewablePercent = ((appData.realTimeData.currentProduction / (appData.realTimeData.totalConsumption + appData.realTimeData.currentProduction)) * 100);
+    const renewableData = timeLabels.map(() => renewablePercent + (Math.random() * 5 - 2.5));
+    
+    charts.efficiencyMetrics = new Chart(ctx.getContext('2d'), {
       type: 'line',
       data: {
-        labels: getTimeLabels(),
+        labels: timeLabels,
         datasets: [
           {
-            label: 'Energy Costs',
-            data: getEnergyBreakdownData(),
+            label: 'PUE (Power Usage Effectiveness)',
+            data: pueData,
             borderColor: '#1FB8CD',
             backgroundColor: 'rgba(31, 184, 205, 0.1)',
             tension: 0.4,
-            fill: true
+            fill: true,
+            yAxisID: 'y'
           },
           {
-            label: 'Infrastructure',
-            data: getInfrastructureBreakdownData(),
+            label: 'Efficiency Score (%)',
+            data: efficiencyData,
             borderColor: '#FFC185',
             backgroundColor: 'rgba(255, 193, 133, 0.1)',
             tension: 0.4,
-            fill: true
+            fill: true,
+            yAxisID: 'y1'
           },
           {
-            label: 'Maintenance',
-            data: getMaintenanceBreakdownData(),
-            borderColor: '#B4413C',
-            backgroundColor: 'rgba(180, 65, 60, 0.1)',
+            label: 'Renewable Energy %',
+            data: renewableData,
+            borderColor: '#34C759',
+            backgroundColor: 'rgba(52, 199, 89, 0.1)',
             tension: 0.4,
-            fill: true
+            fill: true,
+            yAxisID: 'y2'
           }
         ]
       },
@@ -2207,18 +2241,46 @@ function renderCostBreakdownChart() {
         },
         scales: {
           y: {
+            type: 'linear',
+            display: true,
+            position: 'left',
+            title: {
+              display: true,
+              text: 'PUE'
+            },
+            beginAtZero: false,
+            min: 1.0,
+            max: 2.0
+          },
+          y1: {
+            type: 'linear',
+            display: true,
+            position: 'right',
+            title: {
+              display: true,
+              text: 'Efficiency %'
+            },
             beginAtZero: true,
-            ticks: {
-              callback: function(value) {
-                return '€' + value.toLocaleString();
-              }
+            max: 100,
+            grid: {
+              drawOnChartArea: false
+            }
+          },
+          y2: {
+            type: 'linear',
+            display: false,
+            position: 'right',
+            beginAtZero: true,
+            max: 100,
+            grid: {
+              drawOnChartArea: false
             }
           }
         }
       }
     });
   } catch (error) {
-    console.error('Error rendering cost breakdown chart:', error);
+    console.error('Error rendering efficiency metrics chart:', error);
   }
 }
 
@@ -2228,9 +2290,52 @@ function renderEnergyMixChart() {
   if (!ctx) return;
   
   try {
-    const solarCurrent = 1240;
-    const windCurrent = 680;
-    const gridCurrent = 487.7;
+    // Get accumulated values based on current time view
+    const baseSolar = 1240; // base kW
+    const baseWind = 680; // base kW
+    const baseGrid = 487.7; // base kW
+    
+    let solarAccumulated, windAccumulated, gridAccumulated, unit = ' kWh', periodLabel = '';
+    
+    if (currentTimeView === 'hourly') {
+      solarAccumulated = baseSolar;
+      windAccumulated = baseWind;
+      gridAccumulated = baseGrid;
+      periodLabel = 'Hour';
+    } else if (currentTimeView === 'daily') {
+      solarAccumulated = baseSolar * 24;
+      windAccumulated = baseWind * 24;
+      gridAccumulated = baseGrid * 24;
+      periodLabel = 'Day';
+    } else if (currentTimeView === 'monthly') {
+      solarAccumulated = baseSolar * 24 * 30;
+      windAccumulated = baseWind * 24 * 30;
+      gridAccumulated = baseGrid * 24 * 30;
+      periodLabel = 'Month';
+      // Convert to MWh if >= 1000 kWh
+      if (solarAccumulated >= 1000) {
+        solarAccumulated = solarAccumulated / 1000;
+        windAccumulated = windAccumulated / 1000;
+        gridAccumulated = gridAccumulated / 1000;
+        unit = ' MWh';
+      }
+    } else if (currentTimeView === 'yearly') {
+      solarAccumulated = baseSolar * 24 * 365;
+      windAccumulated = baseWind * 24 * 365;
+      gridAccumulated = baseGrid * 24 * 365;
+      periodLabel = 'Year';
+      // Always use MWh for yearly
+      solarAccumulated = solarAccumulated / 1000;
+      windAccumulated = windAccumulated / 1000;
+      gridAccumulated = gridAccumulated / 1000;
+      unit = ' MWh';
+    }
+    
+    // Update period note
+    const periodNote = document.getElementById('energySourcesPeriodNote');
+    if (periodNote) {
+      periodNote.textContent = `Accumulated per ${periodLabel}`;
+    }
     
     if (charts.energyMix) {
       charts.energyMix.destroy();
@@ -2241,7 +2346,7 @@ function renderEnergyMixChart() {
       data: {
         labels: ['Solar Power', 'Wind Power', 'Grid Supply'],
         datasets: [{
-          data: [solarCurrent, windCurrent, gridCurrent],
+          data: [solarAccumulated, windAccumulated, gridAccumulated],
           backgroundColor: ['#1FB8CD', '#FFC185', '#B4413C'],
           borderWidth: 0,
           hoverOffset: 10
@@ -2263,7 +2368,8 @@ function renderEnergyMixChart() {
               label: function(context) {
                 const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
                 const percentage = ((context.parsed / total) * 100).toFixed(1);
-                return `${context.label}: ${context.parsed.toFixed(1)} kW (${percentage}%)`;
+                const value = context.parsed >= 1000 ? (context.parsed / 1000).toFixed(2) + ' MWh' : context.parsed.toFixed(1) + unit;
+                return `${context.label}: ${value} (${percentage}%)`;
               }
             }
           }
@@ -2372,12 +2478,13 @@ function updateSustainabilityForecastChart() {
 // Update charts when time view changes
 function updateCharts() {
   try {
-    if (charts.costBreakdown) {
-      charts.costBreakdown.data.labels = getTimeLabels();
-      charts.costBreakdown.data.datasets[0].data = getEnergyBreakdownData();
-      charts.costBreakdown.data.datasets[1].data = getInfrastructureBreakdownData();
-      charts.costBreakdown.data.datasets[2].data = getMaintenanceBreakdownData();
-      charts.costBreakdown.update('active');
+    // Update efficiency metrics chart when time view changes
+    if (charts.efficiencyMetrics) {
+      renderEfficiencyMetricsChart();
+    }
+    // Update energy mix chart when time view changes
+    if (charts.energyMix) {
+      renderEnergyMixChart();
     }
     
     console.log('Charts updated for time view:', currentTimeView);
