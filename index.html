@@ -6,14 +6,14 @@
     <title>Wattra - Advanced DataCenter AI Platform</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="wattra.svg">
 </head>
 <body>
     <!-- Top Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <h1>🔋 Wattra</h1>
-                <span class="nav-subtitle">AI DataCenter Platform</span>
+                <img src="wattra.svg" alt="Wattra" class="logo-img" />
             </div>
             <div class="nav-right">
                 <div class="language-selector">
@@ -26,24 +26,53 @@
                 </div>
                 <div class="notification-bell" id="notificationBell">
                     <span class="bell-icon">🔔</span>
-                    <span class="notification-count">3</span>
+                    <span class="notification-count">0</span>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Navigation Tabs -->
-    <div class="main-nav">
-        <div class="nav-container">
-            <button class="nav-tab active" data-tab="dashboard" data-i18n="dashboard">Dashboard</button>
-            <button class="nav-tab" data-tab="energy-sources" data-i18n="energySources">Energy Sources</button>
-            <button class="nav-tab" data-tab="contracts" data-i18n="contracts">Energy Provider Contracts</button>
-            <button class="nav-tab" data-tab="sustainability" data-i18n="sustainability">Sustainability</button>
-            <button class="nav-tab" data-tab="workload" data-i18n="workload">Workload Management</button>
-            <button class="nav-tab" data-tab="reports" data-i18n="reports">Reports</button>
-            <button class="nav-tab" data-tab="user-profile" data-i18n="userProfile">User Profile</button>
+    <!-- Left Sidebar Navigation -->
+    <aside class="sidebar-nav">
+        <div class="sidebar-nav-container">
+            <button class="sidebar-nav-item active" data-tab="dashboard" data-i18n="dashboard" title="Dashboard">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard</span>
+            </button>
+            <button class="sidebar-nav-item" data-tab="energy-sources" data-i18n="energySources" title="Energy Sources">
+                <span class="nav-icon">⚡</span>
+                <span class="nav-text">Energy Sources</span>
+            </button>
+            <button class="sidebar-nav-item" data-tab="contracts" data-i18n="contracts" title="Contracts">
+                <span class="nav-icon">📄</span>
+                <span class="nav-text">Contracts</span>
+            </button>
+            <button class="sidebar-nav-item" data-tab="sustainability" data-i18n="sustainability" title="Sustainability">
+                <span class="nav-icon">🌱</span>
+                <span class="nav-text">Sustainability</span>
+            </button>
+            <button class="sidebar-nav-item" data-tab="battery-pv" data-i18n="batteryPv" title="Battery & PV">
+                <span class="nav-icon">🔋</span>
+                <span class="nav-text">Battery & PV</span>
+            </button>
+            <button class="sidebar-nav-item" data-tab="temperature" data-i18n="temperature" title="Temperature">
+                <span class="nav-icon">🌡️</span>
+                <span class="nav-text">Temperature</span>
+            </button>
+            <button class="sidebar-nav-item" data-tab="workload" data-i18n="workload" title="Workload">
+                <span class="nav-icon">💻</span>
+                <span class="nav-text">Workload</span>
+            </button>
+            <button class="sidebar-nav-item" data-tab="reports" data-i18n="reports" title="Reports">
+                <span class="nav-icon">📈</span>
+                <span class="nav-text">Reports</span>
+            </button>
+            <button class="sidebar-nav-item" data-tab="user-profile" data-i18n="userProfile" title="Profile">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Profile</span>
+            </button>
         </div>
-    </div>
+    </aside>
 
     <!-- Notification Panel -->
     <div class="notification-panel" id="notificationPanel">
@@ -312,6 +341,19 @@
                     <p class="section-subtitle">Manage your energy supply contracts across Portugal and Spain markets</p>
                 </div>
 
+                <!-- ERSE Market Prices Section -->
+                <div class="erse-prices-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>ERSE Market Prices</h3>
+                            <span class="last-update">Last updated: <span id="erseLastUpdate">--</span></span>
+                        </div>
+                        <div class="erse-prices-grid" id="ersePricesGrid">
+                            <!-- ERSE prices will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
                 <div class="contracts-grid">
                     <div class="card">
                         <div class="card-header">
@@ -321,6 +363,33 @@
                             </div>
                         </div>
                         
+                        <!-- Filter Controls -->
+                        <div class="contracts-filters">
+                            <div class="filter-group">
+                                <label class="filter-label">Max MW:</label>
+                                <select class="form-control filter-select" id="maxMWFilter">
+                                    <option value="">All</option>
+                                    <option value="2">≤ 2 MW</option>
+                                    <option value="5">≤ 5 MW</option>
+                                    <option value="7">≤ 7 MW</option>
+                                    <option value="10">≤ 10 MW</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label class="filter-label">Tariff Type:</label>
+                                <select class="form-control filter-select" id="tariffTypeFilter">
+                                    <option value="">All</option>
+                                    <option value="fixed">Fixed</option>
+                                    <option value="market">Market</option>
+                                    <option value="hybrid">Hybrid</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label class="filter-label">Min Renewable %:</label>
+                                <input type="number" class="form-control filter-input" id="renewableFilter" min="0" max="100" placeholder="0">
+                            </div>
+                        </div>
+
                         <!-- Available Contracts Table -->
                         <div class="contracts-table-container">
                             <table class="contracts-table" id="contractsTable">
@@ -331,9 +400,11 @@
                                         <th>Country</th>
                                         <th>Fixed Price</th>
                                         <th>Market Price</th>
+                                        <th>Hybrid Price</th>
                                         <th>Reliability</th>
                                         <th>Renewable %</th>
                                         <th>Capacity</th>
+                                        <th>Max MW</th>
                                         <th>Best Value</th>
                                     </tr>
                                 </thead>
@@ -418,6 +489,46 @@
                         </div>
                         <div class="chart-container" style="position: relative; height: 400px;">
                             <canvas id="sustainabilityForecastChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CO2 Emissions Visualizations -->
+                <div class="co2-visualizations">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>CO₂ Emissions by Source</h3>
+                        </div>
+                        <div class="chart-container" style="position: relative; height: 320px;">
+                            <canvas id="co2SourceChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>CO₂ Emissions by Zone</h3>
+                        </div>
+                        <div class="chart-container" style="position: relative; height: 320px;">
+                            <canvas id="co2ZoneChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>CO₂ Reduction Targets</h3>
+                        </div>
+                        <div class="chart-container" style="position: relative; height: 320px;">
+                            <canvas id="co2TargetsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-level CO2 Emission Offers -->
+                <div class="co2-offers-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Multi-level CO₂ Emission Offset Offers</h3>
+                        </div>
+                        <div class="co2-offers-grid" id="co2OffersGrid">
+                            <!-- CO2 offers will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>
@@ -533,6 +644,106 @@
             </div>
         </section>
 
+        <!-- Temperature Monitoring Tab -->
+        <section class="tab-content" id="temperature-tab">
+            <div class="temperature-layout">
+                <div class="section-header">
+                    <h2>Real-Time Temperature Monitoring</h2>
+                    <p class="section-subtitle">Monitor temperature behavior inside the data center with real-time insights</p>
+                </div>
+
+                <!-- Temperature Sensors Grid -->
+                <div class="temperature-sensors-grid" id="temperatureSensorsGrid">
+                    <!-- Temperature sensors will be populated by JavaScript -->
+                </div>
+
+                <!-- Temperature History Chart -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Temperature Trends (24 Hours)</h3>
+                        <div class="chart-controls">
+                            <button class="btn btn--outline btn--sm" id="refreshTemperature">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="position: relative; height: 400px;">
+                        <canvas id="temperatureHistoryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Cooling System Recommendations -->
+                <div class="cooling-recommendations-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Cooling System Recommendations</h3>
+                            <p>Get actionable recommendations on switching to different AC systems or alternative cooling methods</p>
+                        </div>
+                        <div class="cooling-recommendations-grid" id="coolingRecommendationsGrid">
+                            <!-- Cooling recommendations will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Battery & PV Tab -->
+        <section class="tab-content" id="battery-pv-tab">
+            <div class="battery-pv-layout">
+                <div class="section-header">
+                    <h2>Battery & Photovoltaic Panel Management</h2>
+                    <p class="section-subtitle">Concrete dashboards for ROI and recommendations on batteries/solar panels</p>
+                </div>
+
+                <!-- Battery Systems Overview -->
+                <div class="battery-systems-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Battery Storage Systems</h3>
+                        </div>
+                        <div class="battery-systems-grid" id="batterySystemsGrid">
+                            <!-- Battery systems will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- PV Panel Recommendations -->
+                <div class="pv-recommendations-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Photovoltaic Panel ROI & Recommendations</h3>
+                        </div>
+                        <div class="pv-recommendations-content" id="pvRecommendationsContent">
+                            <!-- PV recommendations will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Battery Optimization Recommendations -->
+                <div class="battery-optimization-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Battery Optimization Recommendations</h3>
+                        </div>
+                        <div class="battery-recommendations-grid" id="batteryRecommendationsGrid">
+                            <!-- Battery recommendations will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personalized Analysis -->
+                <div class="personalized-analysis-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Personalized Analysis & Recommendations</h3>
+                        </div>
+                        <div class="personalized-analysis-content" id="personalizedAnalysisContent">
+                            <!-- Personalized analysis will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- User Profile Tab -->
         <section class="tab-content" id="user-profile-tab">
             <div class="user-profile-layout">
@@ -567,6 +778,39 @@
                         <div class="goals-actions">
                             <button class="btn btn--primary" id="saveGoals">Save Goals</button>
                             <button class="btn btn--secondary" id="resetGoals">Reset to Defaults</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consumption Thresholds Configuration -->
+                <div class="thresholds-config">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Consumption Thresholds</h3>
+                            <p>Set flexible energy consumption limits for provider matching</p>
+                        </div>
+                        <div class="thresholds-form" id="thresholdsForm">
+                            <!-- Thresholds form will be populated by JavaScript -->
+                        </div>
+                        <div class="thresholds-actions">
+                            <button class="btn btn--primary" id="saveThresholds">Save Thresholds</button>
+                            <button class="btn btn--secondary" id="resetThresholds">Reset to Defaults</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Graphs Builder -->
+                <div class="custom-graphs-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Custom Graphs Builder</h3>
+                            <p>Create and customize your own graphs and layouts</p>
+                        </div>
+                        <div class="custom-graphs-builder" id="customGraphsBuilder">
+                            <!-- Custom graphs builder will be populated by JavaScript -->
+                        </div>
+                        <div class="custom-graphs-saved" id="customGraphsSaved">
+                            <!-- Saved custom graphs will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>

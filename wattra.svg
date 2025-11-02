@@ -1,0 +1,17 @@
+<svg width="275" height="60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Google Font import -->
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&amp;display=swap');
+    </style>
+  </defs>
+  
+  <!-- Icon -->
+  <g transform="scale(0.6)">
+    <path fill="#2c3e50" d="M0 90 L25 10 L50 90 L75 10 L100 90 L87.5 90 L75 45 L62.5 90 L37.5 90 L25 45 L12.5 90 Z"/>
+    <path fill="#2ecc71" d="M0 90 C 5,80 15,60 25,10 L 25,45 L12.5,90 Z" />
+  </g>
+  
+  <!-- Text -->
+  <text x="75" y="50" font-family="'Poppins', sans-serif" font-size="48" font-weight="700" letter-spacing="-1px" fill="#2c3e50">Wattra</text>
+</svg>
