@@ -395,6 +395,67 @@
                     </div>
                 </div>
 
+                <!-- MIBEL Price Tracking Section -->
+                <div class="mibel-prices-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>MIBEL Price Tracking & Forecasts</h3>
+                            <span class="section-subtitle">Iberian Electricity Market (MIBEL) real-time prices and forecasts</span>
+                        </div>
+                        <div class="mibel-content-grid">
+                            <!-- MIBEL Current Prices -->
+                            <div class="mibel-prices-card">
+                                <div id="mibelPricesContainer">
+                                    <!-- MIBEL prices will be populated by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <!-- MIBEL Forecasts -->
+                            <div class="mibel-forecast-card">
+                                <div class="card-header">
+                                    <h4>Price Forecasts</h4>
+                                </div>
+                                <div id="mibelForecastContainer">
+                                    <!-- MIBEL forecasts will be populated by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <!-- MIBEL Early Warnings -->
+                            <div class="mibel-warnings-card">
+                                <div class="card-header">
+                                    <h4>Early Warnings</h4>
+                                    <span class="warning-status" id="warningStatus">Active</span>
+                                </div>
+                                <div id="mibelWarningsContainer">
+                                    <!-- MIBEL warnings will be populated by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <!-- Index Tariffs -->
+                            <div class="index-tariffs-card">
+                                <div class="card-header">
+                                    <h4>Index Tariffs</h4>
+                                    <span class="tariff-count" id="indexTariffCount">1 active</span>
+                                </div>
+                                <div id="indexTariffsContainer">
+                                    <!-- Index tariffs will be populated by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <!-- Forecast Accuracy -->
+                            <div class="forecast-accuracy-card">
+                                <div class="card-header">
+                                    <h4>Forecast Accuracy</h4>
+                                    <span class="accuracy-subtitle">Historical performance tracking</span>
+                                </div>
+                                <div id="forecastAccuracyContainer">
+                                    <!-- Forecast accuracy will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="contracts-grid">
                     <div class="card">
                         <div class="card-header">
@@ -987,6 +1048,6 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=2024110202"></script>
 </body>
 </html>

@@ -4712,3 +4712,1039 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* MIBEL Price Tracking Styles */
+.mibel-prices-section {
+  margin-bottom: 2rem;
+}
+
+.mibel-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.mibel-content-grid > .mibel-forecast-card {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.mibel-content-grid > .mibel-prices-card {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.mibel-content-grid > .mibel-warnings-card {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.mibel-content-grid > .index-tariffs-card {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.mibel-content-grid > .forecast-accuracy-card {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.mibel-price-card,
+.mibel-forecast-card,
+.mibel-warnings-card,
+.index-tariffs-card,
+.forecast-accuracy-card {
+  background: var(--color-surface);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-standard);
+  position: relative;
+  overflow: hidden;
+}
+
+.mibel-price-card:hover,
+.mibel-forecast-card:hover,
+.mibel-warnings-card:hover,
+.index-tariffs-card:hover,
+.forecast-accuracy-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.mibel-forecast-card {
+  min-height: 400px;
+  background: linear-gradient(135deg, rgba(31, 184, 205, 0.05), rgba(255, 193, 133, 0.05));
+}
+
+.mibel-warnings-card {
+  min-height: 300px;
+}
+
+.index-tariffs-card {
+  min-height: 300px;
+}
+
+.forecast-accuracy-card {
+  min-height: 300px;
+}
+
+.mibel-header,
+.mibel-forecast-card .card-header,
+.mibel-warnings-card .card-header,
+.index-tariffs-card .card-header,
+.forecast-accuracy-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--color-card-border-inner);
+}
+
+.mibel-header h3,
+.mibel-forecast-card .card-header h4,
+.mibel-warnings-card .card-header h4,
+.index-tariffs-card .card-header h4,
+.forecast-accuracy-card .card-header h4 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.mibel-source {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  background: var(--color-secondary);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-base);
+}
+
+.mibel-current-price {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: var(--color-background);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border-inner);
+}
+
+.price-value-large {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-primary), #4FD1C7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.price-unit {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.price-per-kwh {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.mibel-daily-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1rem;
+  background: var(--color-background);
+  border-radius: var(--radius-base);
+  border: 1px solid var(--color-card-border-inner);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.stat-item:hover {
+  background: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.mibel-trend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--color-background);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-card-border-inner);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.mibel-trend:hover {
+  background: var(--color-secondary);
+  transform: translateX(2px);
+}
+
+.trend-label {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.trend-value {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.trend-value.increasing {
+  color: #ef4444;
+}
+
+.trend-value.decreasing {
+  color: #22c55e;
+}
+
+.mibel-update-time {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: 0.75rem;
+  background: var(--color-background);
+  border-radius: var(--radius-base);
+  border: 1px solid var(--color-card-border-inner);
+}
+
+.mibel-prices-section .card-header {
+  margin-bottom: 1.5rem;
+}
+
+.mibel-prices-section .card-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.mibel-prices-section .section-subtitle {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* MIBEL Forecast Styles */
+.mibel-forecast-section {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  border: none;
+}
+
+.forecast-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-card-border-inner);
+  padding-bottom: 0.5rem;
+}
+
+.forecast-tab {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--duration-normal) var(--ease-standard);
+  margin-bottom: -2px;
+  position: relative;
+  border-radius: var(--radius-base) var(--radius-base) 0 0;
+}
+
+.forecast-tab:hover {
+  color: var(--color-primary);
+  background: var(--color-secondary);
+}
+
+.forecast-tab.active {
+  color: var(--color-primary);
+  background: var(--color-secondary);
+  border-bottom-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.forecast-details {
+  margin-top: 1rem;
+}
+
+.forecast-meta {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.forecast-method,
+.forecast-confidence {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.forecast-prices-table {
+  overflow-x: auto;
+  border-radius: var(--radius-base);
+  border: 1px solid var(--color-card-border-inner);
+}
+
+.forecast-prices-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.forecast-prices-table th,
+.forecast-prices-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-card-border-inner);
+}
+
+.forecast-prices-table th {
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-secondary);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.forecast-prices-table tbody tr:hover {
+  background: var(--color-secondary);
+}
+
+.forecast-prices-table td {
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.forecast-weekly {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.week-forecast {
+  padding: 1rem;
+  background: var(--color-background);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.week-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.week-number {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.week-trend {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.week-trend.increasing {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.week-trend.decreasing {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.week-trend.stable {
+  background: rgba(156, 163, 175, 0.1);
+  color: #9ca3af;
+}
+
+.week-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* MIBEL Early Warnings Styles */
+.warning-status {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.no-warnings {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.no-warnings-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.mibel-warning-card {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 1rem;
+  border-left: 4px solid;
+  background: var(--color-background);
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.mibel-warning-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+
+.mibel-warning-card.warning-high {
+  background: rgba(239, 68, 68, 0.08);
+  border-left-color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.mibel-warning-card.warning-medium {
+  background: rgba(251, 191, 36, 0.08);
+  border-left-color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.2);
+}
+
+.mibel-warning-card.warning-low {
+  background: rgba(59, 130, 246, 0.08);
+  border-left-color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.warning-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.warning-icon {
+  font-size: 1.5rem;
+}
+
+.warning-title {
+  flex: 1;
+}
+
+.warning-title h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.warning-time {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.warning-severity {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.warning-severity.high {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.warning-severity.medium {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+}
+
+.warning-severity.low {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.warning-message {
+  margin-bottom: 1rem;
+}
+
+.warning-message p {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.warning-action {
+  padding: 0.75rem;
+  background: var(--color-background);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.warning-impact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.warning-impact span {
+  display: inline-block;
+}
+
+/* Index Tariffs Styles */
+.tariff-count {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(31, 184, 205, 0.15);
+  color: var(--color-primary);
+  border: 1px solid rgba(31, 184, 205, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.index-tariff-card {
+  background: var(--color-background);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--color-card-border-inner);
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.index-tariff-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+}
+
+.tariff-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.tariff-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--color-text);
+}
+
+.tariff-type-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: rgba(31, 184, 205, 0.1);
+  color: var(--color-primary);
+}
+
+.price-breakdown {
+  margin-bottom: 1.25rem;
+}
+
+.price-component {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.price-component:last-child {
+  border-bottom: none;
+}
+
+.price-component.total {
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  border-top: 2px solid var(--color-primary);
+  font-weight: 600;
+}
+
+.component-label {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.component-value {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.price-component.total .component-value {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.tariff-consumption {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--color-surface);
+  border-radius: 8px;
+}
+
+.consumption-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.consumption-item span {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.consumption-item strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.tariff-update-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Recommended Actions Styles */
+.warning-actions {
+  margin-top: 1rem;
+}
+
+.warning-actions h5 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.recommended-action-item {
+  padding: 1rem;
+  background: var(--color-background);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  border-left: 3px solid var(--color-primary);
+}
+
+.recommended-action-item.priority-1 {
+  border-left-color: #ef4444;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.recommended-action-item.priority-2 {
+  border-left-color: #fbbf24;
+  background: rgba(251, 191, 36, 0.05);
+}
+
+.recommended-action-item.priority-3 {
+  border-left-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.action-header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.action-priority {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.action-impact {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.action-impact.high {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.action-impact.medium {
+  background: rgba(251, 191, 36, 0.1);
+  color: #fbbf24;
+}
+
+.action-impact.low {
+  background: rgba(156, 163, 175, 0.1);
+  color: #9ca3af;
+}
+
+.action-automated {
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.action-description {
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.action-savings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.savings-label {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.savings-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #22c55e;
+}
+
+.action-metadata {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.action-time {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Forecast Accuracy Styles */
+.accuracy-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.accuracy-not-available {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.accuracy-not-available-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.forecast-accuracy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.accuracy-card {
+  background: var(--color-background);
+  border-radius: 8px;
+  padding: 1.25rem;
+  border: 2px solid;
+}
+
+.accuracy-card.high {
+  border-color: #22c55e;
+}
+
+.accuracy-card.medium {
+  border-color: #fbbf24;
+}
+
+.accuracy-card.low {
+  border-color: #ef4444;
+}
+
+.accuracy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.accuracy-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.accuracy-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.accuracy-badge.high {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.accuracy-badge.medium {
+  background: rgba(251, 191, 36, 0.1);
+  color: #fbbf24;
+}
+
+.accuracy-badge.low {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.accuracy-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.accuracy-metrics .metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.accuracy-metrics .metric-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.accuracy-metrics .metric-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.accuracy-history {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.accuracy-history h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.accuracy-trend-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  height: 200px;
+  margin-top: 1rem;
+}
+
+.accuracy-bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.bar-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.bars {
+  display: flex;
+  gap: 0.25rem;
+  align-items: flex-end;
+  width: 100%;
+  height: calc(100% - 2rem);
+}
+
+.accuracy-bar {
+  flex: 1;
+  min-height: 20px;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.accuracy-bar.short-term {
+  background: linear-gradient(to top, rgba(31, 184, 205, 0.8), rgba(31, 184, 205, 0.4));
+  border: 1px solid var(--color-primary);
+}
+
+.accuracy-bar.medium-term {
+  background: linear-gradient(to top, rgba(255, 193, 133, 0.8), rgba(255, 193, 133, 0.4));
+  border: 1px solid #FFC185;
+}
+
+.accuracy-bar:hover {
+  opacity: 0.8;
+  transform: scaleY(1.05);
+}
+
+/* Responsive adjustments for MIBEL sections */
+@media (max-width: 1024px) {
+  .mibel-content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mibel-content-grid > .mibel-forecast-card {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .mibel-content-grid > .mibel-prices-card {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  .mibel-content-grid > .mibel-warnings-card {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  
+  .mibel-content-grid > .index-tariffs-card {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  
+  .mibel-content-grid > .forecast-accuracy-card {
+    grid-column: 1;
+    grid-row: 5;
+  }
+}
+
+@media (max-width: 768px) {
+  .mibel-daily-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .forecast-weekly {
+    grid-template-columns: 1fr;
+  }
+  
+  .tariff-consumption {
+    grid-template-columns: 1fr;
+  }
+  
+  .forecast-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .forecast-accuracy-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .accuracy-metrics {
+    grid-template-columns: 1fr;
+  }
+  
+  .accuracy-trend-bars {
+    height: 150px;
+    gap: 0.5rem;
+  }
+  
+  .action-header {
+    flex-wrap: wrap;
+  }
+  
+  .price-value-large {
+    font-size: 2rem;
+  }
+  
+  .mibel-current-price {
+    padding: 1rem;
+  }
+  
+  .forecast-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .forecast-tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}

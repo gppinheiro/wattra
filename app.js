@@ -450,6 +450,269 @@ const appData = {
       "description": "Premium hybrid provider with advanced renewable integration"
     }
   ],
+  // MIBEL Price Tracking and Forecasts
+  "mibelPrices": {
+    "current": {
+      "price": 89.50,
+      "pricePerKWh": 0.0895,
+      "unit": "€/MWh",
+      "timestamp": (new Date()).toISOString(),
+      "market": "MIBEL",
+      "country": "Iberian Peninsula",
+      "source": "OMIE"
+    },
+    "hourly": [
+      { "hour": 0, "price": 82.30, "forecast": true },
+      { "hour": 1, "price": 78.50, "forecast": true },
+      { "hour": 2, "price": 75.20, "forecast": true },
+      { "hour": 3, "price": 72.10, "forecast": true },
+      { "hour": 4, "price": 70.50, "forecast": true },
+      { "hour": 5, "price": 68.90, "forecast": true },
+      { "hour": 6, "price": 71.20, "forecast": true },
+      { "hour": 7, "price": 85.40, "forecast": true },
+      { "hour": 8, "price": 92.60, "forecast": true },
+      { "hour": 9, "price": 98.20, "forecast": true },
+      { "hour": 10, "price": 105.50, "forecast": true },
+      { "hour": 11, "price": 112.30, "forecast": true },
+      { "hour": 12, "price": 118.90, "forecast": true },
+      { "hour": 13, "price": 125.40, "forecast": true },
+      { "hour": 14, "price": 128.20, "forecast": true },
+      { "hour": 15, "price": 124.80, "forecast": true },
+      { "hour": 16, "price": 118.50, "forecast": true },
+      { "hour": 17, "price": 115.20, "forecast": true },
+      { "hour": 18, "price": 122.60, "forecast": true },
+      { "hour": 19, "price": 130.40, "forecast": true },
+      { "hour": 20, "price": 135.80, "forecast": true },
+      { "hour": 21, "price": 128.50, "forecast": true },
+      { "hour": 22, "price": 115.30, "forecast": true },
+      { "hour": 23, "price": 95.60, "forecast": true }
+    ],
+    "daily": {
+      "average": 105.40,
+      "min": 68.90,
+      "max": 135.80,
+      "date": (new Date()).toISOString().split('T')[0]
+    },
+    "trend": {
+      "direction": "increasing",
+      "percentageChange": 3.2,
+      "period": "24h"
+    }
+  },
+  "mibelForecast": {
+    "shortTerm": {
+      "horizon": "24-48 hours",
+      "method": "Day-ahead market (OMIE)",
+      "confidence": 85,
+      "prices": [
+        { "date": "2025-02-11", "average": 98.50, "min": 72.00, "max": 128.00, "volatility": "medium" },
+        { "date": "2025-02-12", "average": 105.20, "min": 75.50, "max": 135.50, "volatility": "high" }
+      ]
+    },
+    "mediumTerm": {
+      "horizon": "7 days",
+      "method": "Market forecast with ML",
+      "confidence": 72,
+      "prices": [
+        { "date": "2025-02-11", "average": 98.50, "min": 72.00, "max": 128.00 },
+        { "date": "2025-02-12", "average": 105.20, "min": 75.50, "max": 135.50 },
+        { "date": "2025-02-13", "average": 102.80, "min": 74.00, "max": 132.00 },
+        { "date": "2025-02-14", "average": 108.40, "min": 78.00, "max": 138.00 },
+        { "date": "2025-02-15", "average": 95.60, "min": 70.00, "max": 120.00 },
+        { "date": "2025-02-16", "average": 92.30, "min": 68.00, "max": 115.00 },
+        { "date": "2025-02-17", "average": 99.10, "min": 72.00, "max": 125.00 }
+      ]
+    },
+    "longTerm": {
+      "horizon": "30 days",
+      "method": "Statistical modeling with weather integration",
+      "confidence": 58,
+      "weeklyAverage": [
+        { "week": 1, "average": 103.50, "trend": "stable" },
+        { "week": 2, "average": 98.20, "trend": "decreasing" },
+        { "week": 3, "average": 107.80, "trend": "increasing" },
+        { "week": 4, "average": 95.40, "trend": "decreasing" }
+      ]
+    },
+    "forecastSources": [
+      {
+        "name": "OMIE Day-ahead Market",
+        "type": "official",
+        "horizon": "24h",
+        "updateFrequency": "daily",
+        "apiAvailable": true
+      },
+      {
+        "name": "AleaSoft Forecast",
+        "type": "commercial",
+        "horizon": "10 days",
+        "updateFrequency": "daily",
+        "apiAvailable": true
+      },
+      {
+        "name": "Internal ML Model",
+        "type": "custom",
+        "horizon": "7-30 days",
+        "updateFrequency": "hourly",
+        "apiAvailable": false
+      }
+    ],
+    "historicalData": [],
+    "accuracyMetrics": {
+      "current": {
+        "shortTerm": {
+          "accuracy": "87.5",
+          "mape": "8.2",
+          "mae": "7.5",
+          "rmse": "9.8",
+          "dataPoints": 48
+        },
+        "mediumTerm": {
+          "accuracy": "78.3",
+          "mape": "12.5",
+          "mae": "11.2",
+          "rmse": "14.5",
+          "dataPoints": 168
+        }
+      },
+      "historical": [
+        {
+          "date": "2025-02-04",
+          "metrics": {
+            "shortTerm": { "accuracy": "85.2", "mape": "9.1", "mae": "8.2", "rmse": "10.5", "dataPoints": 48 },
+            "mediumTerm": { "accuracy": "76.8", "mape": "13.2", "mae": "12.1", "rmse": "15.3", "dataPoints": 168 }
+          }
+        },
+        {
+          "date": "2025-02-05",
+          "metrics": {
+            "shortTerm": { "accuracy": "86.1", "mape": "8.8", "mae": "7.9", "rmse": "10.2", "dataPoints": 48 },
+            "mediumTerm": { "accuracy": "77.2", "mape": "12.9", "mae": "11.8", "rmse": "15.0", "dataPoints": 168 }
+          }
+        },
+        {
+          "date": "2025-02-06",
+          "metrics": {
+            "shortTerm": { "accuracy": "88.3", "mape": "7.9", "mae": "7.2", "rmse": "9.5", "dataPoints": 48 },
+            "mediumTerm": { "accuracy": "79.1", "mape": "12.1", "mae": "10.9", "rmse": "14.2", "dataPoints": 168 }
+          }
+        },
+        {
+          "date": "2025-02-07",
+          "metrics": {
+            "shortTerm": { "accuracy": "86.7", "mape": "8.5", "mae": "7.7", "rmse": "9.9", "dataPoints": 48 },
+            "mediumTerm": { "accuracy": "77.9", "mape": "12.7", "mae": "11.5", "rmse": "14.8", "dataPoints": 168 }
+          }
+        },
+        {
+          "date": "2025-02-08",
+          "metrics": {
+            "shortTerm": { "accuracy": "87.9", "mape": "8.1", "mae": "7.4", "rmse": "9.6", "dataPoints": 48 },
+            "mediumTerm": { "accuracy": "78.6", "mape": "12.4", "mae": "11.1", "rmse": "14.4", "dataPoints": 168 }
+          }
+        },
+        {
+          "date": "2025-02-09",
+          "metrics": {
+            "shortTerm": { "accuracy": "87.2", "mape": "8.3", "mae": "7.6", "rmse": "9.8", "dataPoints": 48 },
+            "mediumTerm": { "accuracy": "78.1", "mape": "12.6", "mae": "11.3", "rmse": "14.6", "dataPoints": 168 }
+          }
+        },
+        {
+          "date": "2025-02-10",
+          "metrics": {
+            "shortTerm": { "accuracy": "87.5", "mape": "8.2", "mae": "7.5", "rmse": "9.8", "dataPoints": 48 },
+            "mediumTerm": { "accuracy": "78.3", "mape": "12.5", "mae": "11.2", "rmse": "14.5", "dataPoints": 168 }
+          }
+        }
+      ]
+    }
+  },
+  "mibelEarlyWarnings": {
+    "enabled": true,
+    "thresholds": {
+      "priceSpike": {
+        "percentageIncrease": 15,
+        "absoluteIncrease": 20,
+        "timeWindow": "1 hour"
+      },
+      "volatility": {
+        "highVolatility": 25,
+        "extremeVolatility": 40
+      },
+      "trend": {
+        "sustainedIncrease": 10,
+        "sustainedDecrease": -10,
+        "period": "24 hours"
+      }
+    },
+    "activeWarnings": [
+      {
+        "id": 1,
+        "type": "price_spike",
+        "severity": "medium",
+        "message": "Expected price increase of 18% in next 3 hours",
+        "time": "2025-02-11T14:00:00Z",
+        "recommendedAction": "Consider battery discharge or reduce consumption",
+        "impact": {
+          "estimatedCostIncrease": 45.20,
+          "timeWindow": "3 hours"
+        }
+      },
+      {
+        "id": 2,
+        "type": "volatility",
+        "severity": "low",
+        "message": "Increased price volatility detected for tomorrow",
+        "time": "2025-02-12T00:00:00Z",
+        "recommendedAction": "Monitor forecasts closely",
+        "impact": {
+          "volatilityRange": "±22%",
+          "confidence": "medium"
+        }
+      }
+    ],
+    "history": [
+      {
+        "date": "2025-02-10",
+        "warnings": 2,
+        "accuracy": 87
+      },
+      {
+        "date": "2025-02-09",
+        "warnings": 1,
+        "accuracy": 92
+      }
+    ]
+  },
+  "indexTariffs": {
+    "active": [
+      {
+        "id": 1,
+        "provider": "EDP Renewables",
+        "type": "Index",
+        "basePrice": 0.045,
+        "mibelIndex": true,
+        "mibelMultiplier": 1.0,
+        "fixedMargin": 0.005,
+        "currentEffectivePrice": 0.0945,
+        "updateFrequency": "hourly",
+        "lastUpdate": (new Date()).toISOString(),
+        "consumptionBreakdown": {
+          "baseLoad": 800,
+          "variableLoad": 1060,
+          "total": 1860
+        }
+      }
+    ],
+    "configuration": {
+      "mibelDataSource": "OMIE API",
+      "forecastIntegration": true,
+      "earlyWarningEnabled": true,
+      "updateFrequency": "hourly",
+      "priceAdjustmentLag": "1 hour"
+    }
+  },
   "availableProviders": [
     {
       "id": 1,
@@ -1735,40 +1998,53 @@ function setupUserProfileButtons() {
 
 // FIXED: Tab navigation function
 function switchTab(tabId) {
-  console.log('Switching to tab:', tabId);
+  console.log('========================================');
+  console.log('SWITCHTAB CALLED - Tab ID:', tabId);
+  console.log('========================================');
   
   try {
+    console.log('[1] Starting try block');
+    
     // Clear all active states first
+    console.log('[2] About to query .nav-tab elements');
     const navTabs = document.querySelectorAll('.nav-tab');
+    console.log('[3] Found nav tabs:', navTabs.length);
+    
     navTabs.forEach(tab => {
       tab.classList.remove('active');
     });
+    console.log('[4] Cleared all nav tab active states');
     
     // Set active tab
     const activeTab = document.querySelector(`[data-tab="${tabId}"]`);
     if (activeTab) {
       activeTab.classList.add('active');
       console.log('Activated tab button:', tabId);
+    } else {
+      console.warn('Could not find tab button with data-tab:', tabId);
     }
     
     // Hide all tab content
     const tabContents = document.querySelectorAll('.tab-content');
+    console.log('Found tab content elements:', tabContents.length);
     tabContents.forEach(content => {
       content.classList.remove('active');
     });
     
     // Show target tab content
     const targetTab = document.getElementById(`${tabId}-tab`);
+    console.log('Looking for tab content:', `${tabId}-tab`, 'Found:', !!targetTab);
+    
     if (targetTab) {
       targetTab.classList.add('active');
       console.log('Showing tab content:', `${tabId}-tab`);
+      console.log('About to schedule setTimeout for rendering...');
       
       // Render specific content based on tab - FIXED
       setTimeout(() => {
+        console.log('setTimeout executed for tab:', tabId);
         try {
-          if (tabId === 'contracts') {
-            renderContracts();
-          } else if (tabId === 'workload') {
+          if (tabId === 'workload') {
             renderWorkload();
           } else if (tabId === 'user-profile') {
             renderUserProfile();
@@ -1785,8 +2061,28 @@ function switchTab(tabId) {
             renderTemperatureMonitoring();
             initSensorTabs();
           } else if (tabId === 'contracts') {
+            console.log('[CONTRACTS TAB] Rendering contracts tab content...');
             renderContracts();
             renderEnhancedContractManagement();
+            console.log('[CONTRACTS TAB] Now rendering MIBEL sections...');
+            // Render immediately with existing data
+            renderMIBELPrices();
+            renderMIBELForecast();
+            renderMIBELEarlyWarnings();
+            renderIndexTariffs();
+            renderForecastAccuracy();
+            console.log('[CONTRACTS TAB] Initial MIBEL rendering complete');
+            // Then update MIBEL prices in background and re-render
+            updateMIBELPrices().then(() => {
+              renderMIBELPrices();
+              renderMIBELForecast();
+              renderMIBELEarlyWarnings();
+              renderIndexTariffs();
+              renderForecastAccuracy();
+            }).catch((err) => {
+              console.warn('MIBEL prices update failed:', err);
+              // Data already rendered, so this is fine
+            });
           } else if (tabId === 'sustainability') {
             renderSustainability();
             setTimeout(() => {
@@ -1805,16 +2101,20 @@ function switchTab(tabId) {
             }
           });
         } catch (error) {
-          console.error('Error rendering tab content:', error);
+          console.error('❌ Error rendering tab content:', error);
+          console.error('Error stack:', error.stack);
+          console.error('Tab ID:', tabId);
         }
       }, 150);
       
       showToast(`Navigated to ${tabId.replace('-', ' ')}`);
     } else {
-      console.error('Target tab content not found:', `${tabId}-tab`);
+      console.error('❌ Target tab content not found:', `${tabId}-tab`);
+      console.log('Available tab IDs:', Array.from(document.querySelectorAll('[id$="-tab"]')).map(el => el.id));
     }
   } catch (error) {
-    console.error('Error switching tabs:', error);
+    console.error('❌ Error switching tabs:', error);
+    console.error('Error stack:', error.stack);
   }
 }
 
@@ -2152,6 +2452,10 @@ function renderInitialData() {
   try {
     updateKPICards();
     updateSavingsProjection();
+    // Initialize MIBEL prices (async, but don't block)
+    updateMIBELPrices().catch(err => {
+      console.warn('MIBEL prices update failed on init:', err);
+    });
     
     const lastUpdateElement = document.getElementById('lastUpdateTime');
     if (lastUpdateElement) {
@@ -2635,6 +2939,1607 @@ function getFilteredProviders() {
   }
   
   return filtered;
+}
+
+// MIBEL API Configuration
+const MIBEL_API_CONFIG = {
+  omie: {
+    baseUrl: 'https://www.omie.es',
+    endpoint: '/en/market-results/daily/daily-market/day-ahead-price',
+    apiAvailable: true,
+    requiresAuth: false
+  },
+  esios: {
+    baseUrl: 'https://api.esios.ree.es',
+    endpoint: '/indicators',
+    apiAvailable: true,
+    requiresAuth: true,
+    // To get an ESIOS API token, visit: https://api.esios.ree.es/
+    // Click "Personal token request" and follow the instructions
+    token: '' // Set your ESIOS API token here: MIBEL_API_CONFIG.esios.token = 'your-token-here';
+  },
+  fallbackToSimulated: true
+};
+
+// MIBEL Price Tracking and Forecast Functions
+async function updateMIBELPrices() {
+  console.log('Updating MIBEL prices...');
+  try {
+    // Try to fetch real-time data from APIs
+    let priceData = null;
+    
+    // Try ESIOS API first (if token is available)
+    if (MIBEL_API_CONFIG.esios.token) {
+      priceData = await fetchMIBELFromESIOS();
+    }
+    
+    // Fallback to OMIE data scraping if ESIOS fails
+    if (!priceData) {
+      priceData = await fetchMIBELFromOMIE();
+    }
+    
+    // If all APIs fail, use simulated data
+    if (!priceData && MIBEL_API_CONFIG.fallbackToSimulated) {
+      priceData = generateSimulatedMIBELPrices();
+      console.warn('Using simulated MIBEL prices - API unavailable');
+    }
+    
+    if (priceData) {
+      // Update current price
+      appData.mibelPrices.current.price = priceData.currentPrice;
+      appData.mibelPrices.current.pricePerKWh = priceData.currentPrice / 1000;
+      appData.mibelPrices.current.timestamp = new Date().toISOString();
+      
+      // Update hourly prices
+      if (priceData.hourly) {
+        appData.mibelPrices.hourly = priceData.hourly;
+      }
+      
+      // Calculate daily average
+      const hourlyPrices = appData.mibelPrices.hourly.map(h => h.price);
+      appData.mibelPrices.daily.average = hourlyPrices.reduce((a, b) => a + b, 0) / hourlyPrices.length;
+      appData.mibelPrices.daily.min = Math.min(...hourlyPrices);
+      appData.mibelPrices.daily.max = Math.max(...hourlyPrices);
+      
+      // Calculate trend
+      calculateMIBELTrend();
+      
+      // Store historical data for accuracy tracking
+      storeMIBELHistoricalData(priceData);
+      
+      // Update index tariffs
+      updateIndexTariffPrices();
+      
+      // Check for early warnings
+      checkMIBELEarlyWarnings();
+      
+      console.log('MIBEL prices updated successfully');
+    }
+  } catch (error) {
+    console.error('Error updating MIBEL prices:', error);
+    // Fallback to simulated data on error
+    if (MIBEL_API_CONFIG.fallbackToSimulated) {
+      const priceData = generateSimulatedMIBELPrices();
+      updateMIBELDataFromPriceData(priceData);
+    }
+  }
+}
+
+// Fetch MIBEL prices from ESIOS API
+async function fetchMIBELFromESIOS() {
+  try {
+    // ESIOS Indicator ID for MIBEL spot price (Spain)
+    // Indicator 1001 is typically the day-ahead market price
+    const indicatorId = '1001';
+    const url = `${MIBEL_API_CONFIG.esios.baseUrl}${MIBEL_API_CONFIG.esios.endpoint}/${indicatorId}`;
+    
+    const headers = {
+      'Host': 'api.esios.ree.es',
+      'x-api-key': MIBEL_API_CONFIG.esios.token,
+      'Accept': 'application/json'
+    };
+    
+    // Get current date range (today)
+    const today = new Date();
+    const startDate = new Date(today);
+    startDate.setHours(0, 0, 0, 0);
+    const endDate = new Date(today);
+    endDate.setHours(23, 59, 59, 999);
+    
+    const params = {
+      start_date: startDate.toISOString().split('T')[0] + 'T00:00:00',
+      end_date: endDate.toISOString().split('T')[0] + 'T23:59:59'
+    };
+    
+    const response = await fetch(`${url}?${new URLSearchParams(params)}`, { headers });
+    
+    if (!response.ok) {
+      throw new Error(`ESIOS API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    if (data.indicator && data.indicator.values) {
+      const values = data.indicator.values;
+      const currentHour = new Date().getHours();
+      
+      // Process hourly prices
+      const hourlyPrices = [];
+      for (let hour = 0; hour < 24; hour++) {
+        const hourData = values.find(v => {
+          const valueHour = new Date(v.datetime_utc).getUTCHours();
+          return valueHour === hour;
+        });
+        
+        if (hourData) {
+          hourlyPrices.push({
+            hour: hour,
+            price: hourData.value / 1000, // Convert from €/MWh to €/kWh then back to MWh for consistency
+            forecast: false
+          });
+        } else {
+          // Use forecast if actual data not available
+          hourlyPrices.push({
+            hour: hour,
+            price: appData.mibelPrices.hourly[hour]?.price || 0,
+            forecast: true
+          });
+        }
+      }
+      
+      // Get current price
+      const currentPriceData = values.find(v => {
+        const valueHour = new Date(v.datetime_utc).getUTCHours();
+        return valueHour === currentHour;
+      });
+      
+      const currentPrice = currentPriceData ? (currentPriceData.value / 1000) : hourlyPrices[currentHour]?.price || 0;
+      
+      return {
+        currentPrice: currentPrice * 1000, // Convert back to €/MWh
+        hourly: hourlyPrices.map(h => ({ hour: h.hour, price: h.price * 1000, forecast: h.forecast }))
+      };
+    }
+    
+    return null;
+  } catch (error) {
+    console.error('Error fetching from ESIOS API:', error);
+    return null;
+  }
+}
+
+// Fetch MIBEL prices from OMIE (scraping approach)
+async function fetchMIBELFromOMIE() {
+  try {
+    // Note: OMIE doesn't have a public API, so we would need to scrape their website
+    // For now, we'll use a CORS proxy approach or backend proxy
+    // This is a placeholder that shows the structure
+    
+    const today = new Date();
+    const dateParam = today.toISOString().split('T')[0];
+    
+    // In production, this would be done via a backend proxy to avoid CORS issues
+    // For now, return null to trigger fallback
+    console.log('OMIE data fetching requires backend proxy - using fallback');
+    return null;
+    
+    // Example structure if backend proxy exists:
+    /*
+    const response = await fetch(`/api/omie/prices?date=${dateParam}`);
+    if (response.ok) {
+      const data = await response.json();
+      return processOMIEData(data);
+    }
+    */
+  } catch (error) {
+    console.error('Error fetching from OMIE:', error);
+    return null;
+  }
+}
+
+// Generate simulated MIBEL prices (fallback)
+function generateSimulatedMIBELPrices() {
+  const currentHour = new Date().getHours();
+  const hourlyPrices = appData.mibelPrices.hourly || [];
+  
+  // Use existing hourly prices or generate new ones
+  const prices = hourlyPrices.length > 0 ? hourlyPrices : generateHourlyPricePattern();
+  
+  const currentPrice = prices[currentHour]?.price || prices[0]?.price || 89.50;
+  
+  return {
+    currentPrice: currentPrice,
+    hourly: prices
+  };
+}
+
+// Generate hourly price pattern (simulated)
+function generateHourlyPricePattern() {
+  const basePrice = 90;
+  const hourlyPattern = [
+    82.30, 78.50, 75.20, 72.10, 70.50, 68.90, // 0-5 (low demand)
+    71.20, 85.40, 92.60, 98.20, 105.50, 112.30, // 6-11 (morning ramp)
+    118.90, 125.40, 128.20, 124.80, 118.50, 115.20, // 12-17 (afternoon peak)
+    122.60, 130.40, 135.80, 128.50, 115.30, 95.60 // 18-23 (evening)
+  ];
+  
+  // Add some random variation (±5%)
+  return hourlyPattern.map((price, hour) => ({
+    hour: hour,
+    price: price * (1 + (Math.random() - 0.5) * 0.1),
+    forecast: false
+  }));
+}
+
+// Update MIBEL data from price data object
+function updateMIBELDataFromPriceData(priceData) {
+  appData.mibelPrices.current.price = priceData.currentPrice;
+  appData.mibelPrices.current.pricePerKWh = priceData.currentPrice / 1000;
+  appData.mibelPrices.current.timestamp = new Date().toISOString();
+  
+  if (priceData.hourly) {
+    appData.mibelPrices.hourly = priceData.hourly;
+  }
+  
+  const hourlyPrices = appData.mibelPrices.hourly.map(h => h.price);
+  appData.mibelPrices.daily.average = hourlyPrices.reduce((a, b) => a + b, 0) / hourlyPrices.length;
+  appData.mibelPrices.daily.min = Math.min(...hourlyPrices);
+  appData.mibelPrices.daily.max = Math.max(...hourlyPrices);
+  
+  calculateMIBELTrend();
+  storeMIBELHistoricalData(priceData);
+  updateIndexTariffPrices();
+  checkMIBELEarlyWarnings();
+}
+
+// Calculate MIBEL price trend
+function calculateMIBELTrend() {
+  const hourlyPrices = appData.mibelPrices.hourly;
+  if (!hourlyPrices || hourlyPrices.length < 2) return;
+  
+  // Compare current average with previous day average (simulated)
+  const currentAverage = appData.mibelPrices.daily.average;
+  const previousAverage = currentAverage * 0.97; // Simulated previous day
+  
+  const percentageChange = ((currentAverage - previousAverage) / previousAverage) * 100;
+  
+  appData.mibelPrices.trend = {
+    direction: percentageChange > 0 ? 'increasing' : 'decreasing',
+    percentageChange: Math.abs(percentageChange).toFixed(1),
+    period: '24h'
+  };
+}
+
+// Store historical MIBEL data for accuracy tracking
+function storeMIBELHistoricalData(priceData) {
+  if (!appData.mibelForecast.historicalData) {
+    appData.mibelForecast.historicalData = [];
+  }
+  
+  const historicalEntry = {
+    date: new Date().toISOString().split('T')[0],
+    timestamp: new Date().toISOString(),
+    actualPrice: priceData.currentPrice,
+    hourlyActual: priceData.hourly,
+    forecastUsed: appData.mibelForecast.shortTerm.prices[0] || null
+  };
+  
+  appData.mibelForecast.historicalData.push(historicalEntry);
+  
+  // Keep only last 30 days
+  if (appData.mibelForecast.historicalData.length > 30) {
+    appData.mibelForecast.historicalData.shift();
+  }
+  
+  // Calculate forecast accuracy
+  calculateForecastAccuracy();
+}
+
+function updateIndexTariffPrices() {
+  console.log('Updating index tariff prices...');
+  try {
+    const indexTariffs = appData.indexTariffs.active;
+    const mibelCurrent = appData.mibelPrices.current.pricePerKWh;
+    
+    indexTariffs.forEach(tariff => {
+      if (tariff.mibelIndex) {
+        // Calculate effective price: basePrice + (MIBEL price * multiplier) + fixed margin
+        tariff.currentEffectivePrice = 
+          tariff.basePrice + 
+          (mibelCurrent * tariff.mibelMultiplier) + 
+          tariff.fixedMargin;
+        tariff.lastUpdate = new Date().toISOString();
+      }
+    });
+    
+    console.log('Index tariff prices updated');
+  } catch (error) {
+    console.error('Error updating index tariff prices:', error);
+  }
+}
+
+function checkMIBELEarlyWarnings() {
+  console.log('Checking MIBEL early warnings...');
+  try {
+    if (!appData.mibelEarlyWarnings.enabled) return;
+    
+    const warnings = [];
+    const currentPrice = appData.mibelPrices.current.price;
+    const hourlyPrices = appData.mibelPrices.hourly;
+    const forecast = appData.mibelForecast.shortTerm;
+    const thresholds = appData.mibelEarlyWarnings.thresholds;
+    
+    // Check for price spikes in forecast
+    if (forecast && forecast.prices) {
+      forecast.prices.forEach(dayForecast => {
+        const priceIncrease = ((dayForecast.average - currentPrice) / currentPrice) * 100;
+        
+        if (priceIncrease >= thresholds.priceSpike.percentageIncrease) {
+          const recommendedActions = generateRecommendedActions('price_spike', {
+            priceIncrease: priceIncrease,
+            forecastPrice: dayForecast.average,
+            date: dayForecast.date,
+            severity: priceIncrease >= 25 ? 'high' : 'medium'
+          });
+          
+          warnings.push({
+            id: Date.now() + Math.random(),
+            type: 'price_spike',
+            severity: priceIncrease >= 25 ? 'high' : 'medium',
+            message: `Expected price increase of ${priceIncrease.toFixed(1)}% on ${dayForecast.date}`,
+            time: new Date().toISOString(),
+            recommendedActions: recommendedActions,
+            primaryAction: recommendedActions[0],
+            impact: {
+              estimatedCostIncrease: calculateCostImpact(priceIncrease, dayForecast.average),
+              timeWindow: '24 hours',
+              date: dayForecast.date
+            }
+          });
+        }
+      });
+    }
+    
+    // Check for volatility
+    if (forecast && forecast.prices) {
+      forecast.prices.forEach(dayForecast => {
+        const volatility = ((dayForecast.max - dayForecast.min) / dayForecast.average) * 100;
+        
+        if (volatility >= thresholds.volatility.highVolatility) {
+          const recommendedActions = generateRecommendedActions('volatility', {
+            volatility: volatility,
+            date: dayForecast.date,
+            severity: volatility >= thresholds.volatility.extremeVolatility ? 'high' : 'medium'
+          });
+          
+          warnings.push({
+            id: Date.now() + Math.random(),
+            type: 'volatility',
+            severity: volatility >= thresholds.volatility.extremeVolatility ? 'high' : 'medium',
+            message: `High price volatility expected on ${dayForecast.date}: ${volatility.toFixed(1)}%`,
+            time: new Date().toISOString(),
+            recommendedActions: recommendedActions,
+            primaryAction: recommendedActions[0],
+            impact: {
+              volatilityRange: `±${volatility.toFixed(1)}%`,
+              confidence: dayForecast.volatility || 'medium',
+              date: dayForecast.date
+            }
+          });
+        }
+      });
+    }
+    
+    // Check for sustained trends
+    const trend = appData.mibelPrices.trend;
+    if (trend && Math.abs(parseFloat(trend.percentageChange)) >= Math.abs(thresholds.trend.sustainedIncrease)) {
+      const trendDirection = trend.direction;
+      const recommendedActions = generateRecommendedActions('trend', {
+        direction: trendDirection,
+        percentageChange: parseFloat(trend.percentageChange),
+        period: trend.period
+      });
+      
+      warnings.push({
+        id: Date.now() + Math.random(),
+        type: 'sustained_trend',
+        severity: Math.abs(parseFloat(trend.percentageChange)) >= 20 ? 'high' : 'medium',
+        message: `Sustained ${trendDirection} trend detected: ${trend.percentageChange}% over ${trend.period}`,
+        time: new Date().toISOString(),
+        recommendedActions: recommendedActions,
+        primaryAction: recommendedActions[0],
+        impact: {
+          trendDirection: trendDirection,
+          percentageChange: trend.percentageChange,
+          period: trend.period
+        }
+      });
+    }
+    
+    // Update active warnings
+    appData.mibelEarlyWarnings.activeWarnings = warnings;
+    
+    // Show notifications for new warnings
+    warnings.forEach(warning => {
+      showMIBELWarningNotification(warning);
+    });
+    
+    console.log(`MIBEL early warnings checked: ${warnings.length} active warnings`);
+  } catch (error) {
+    console.error('Error checking MIBEL early warnings:', error);
+  }
+}
+
+// Generate recommended actions based on warning type and context
+function generateRecommendedActions(warningType, context) {
+  const actions = [];
+  
+  switch (warningType) {
+    case 'price_spike':
+      if (context.severity === 'high') {
+        actions.push({
+          priority: 1,
+          action: 'Discharge battery storage to reduce grid consumption during high-price hours',
+          impact: 'high',
+          estimatedSavings: calculateBatterySavings(context.forecastPrice),
+          implementationTime: 'immediate',
+          automated: true
+        });
+        actions.push({
+          priority: 2,
+          action: 'Shift non-critical workloads to low-price hours (night/early morning)',
+          impact: 'medium',
+          estimatedSavings: calculateWorkloadShiftSavings(context.priceIncrease),
+          implementationTime: '1-2 hours',
+          automated: false
+        });
+        actions.push({
+          priority: 3,
+          action: 'Reduce cooling system load during peak hours (if possible)',
+          impact: 'medium',
+          estimatedSavings: calculateCoolingSavings(context.forecastPrice),
+          implementationTime: '30 minutes',
+          automated: false
+        });
+      } else {
+        actions.push({
+          priority: 1,
+          action: 'Monitor price forecasts closely and prepare for price increase',
+          impact: 'low',
+          estimatedSavings: 0,
+          implementationTime: 'ongoing',
+          automated: false
+        });
+        actions.push({
+          priority: 2,
+          action: 'Consider battery discharge during highest price hours',
+          impact: 'medium',
+          estimatedSavings: calculateBatterySavings(context.forecastPrice),
+          implementationTime: 'immediate',
+          automated: true
+        });
+      }
+      break;
+      
+    case 'volatility':
+      actions.push({
+        priority: 1,
+        action: 'Implement flexible workload scheduling to take advantage of price variations',
+        impact: 'high',
+        estimatedSavings: calculateVolatilitySavings(context.volatility),
+        implementationTime: '2-4 hours',
+        automated: true
+      });
+      actions.push({
+        priority: 2,
+        action: 'Monitor intraday prices and adjust consumption dynamically',
+        impact: 'medium',
+        estimatedSavings: 0,
+        implementationTime: 'ongoing',
+        automated: false
+      });
+      actions.push({
+        priority: 3,
+        action: 'Consider partial battery charging/discharging to benefit from price swings',
+        impact: 'medium',
+        estimatedSavings: calculateBatteryVolatilitySavings(context.volatility),
+        implementationTime: '1 hour',
+        automated: true
+      });
+      break;
+      
+    case 'trend':
+      if (context.direction === 'increasing') {
+        actions.push({
+          priority: 1,
+          action: 'Reduce overall consumption during sustained high-price period',
+          impact: 'high',
+          estimatedSavings: calculateTrendSavings(context.percentageChange),
+          implementationTime: 'immediate',
+          automated: false
+        });
+        actions.push({
+          priority: 2,
+          action: 'Maximize battery and renewable energy usage',
+          impact: 'high',
+          estimatedSavings: calculateRenewableSavings(),
+          implementationTime: 'immediate',
+          automated: true
+        });
+      } else {
+        actions.push({
+          priority: 1,
+          action: 'Charge battery storage during low-price period',
+          impact: 'medium',
+          estimatedSavings: 0,
+          implementationTime: 'immediate',
+          automated: true
+        });
+        actions.push({
+          priority: 2,
+          action: 'Shift deferred workloads to current low-price window',
+          impact: 'medium',
+          estimatedSavings: calculateDeferredWorkloadSavings(context.percentageChange),
+          implementationTime: '1-2 hours',
+          automated: false
+        });
+      }
+      break;
+  }
+  
+  return actions;
+}
+
+// Calculate savings from battery discharge
+function calculateBatterySavings(forecastPrice) {
+  const batteryCapacity = appData.batteryPVSystem?.batterySystem?.capacity || 500; // kWh
+  const currentPrice = appData.mibelPrices.current.pricePerKWh;
+  const priceDiff = (forecastPrice / 1000) - currentPrice;
+  return (batteryCapacity * priceDiff).toFixed(2);
+}
+
+// Calculate savings from workload shifting
+function calculateWorkloadShiftSavings(priceIncrease) {
+  const variableLoad = appData.indexTariffs.active[0]?.consumptionBreakdown?.variableLoad || 1060; // kW
+  const hoursToShift = 4; // Assume 4 hours of shiftable workload
+  const currentPrice = appData.mibelPrices.current.pricePerKWh;
+  const highPrice = currentPrice * (1 + priceIncrease / 100);
+  const lowPrice = currentPrice * 0.7; // Assume 30% lower at night
+  const savings = (variableLoad * hoursToShift * (highPrice - lowPrice)).toFixed(2);
+  return savings;
+}
+
+// Calculate savings from cooling reduction
+function calculateCoolingSavings(forecastPrice) {
+  const coolingLoad = appData.indexConsumption?.cooling || 450; // kW
+  const reductionPercent = 0.15; // 15% reduction
+  const hours = 4; // Peak hours
+  const currentPrice = appData.mibelPrices.current.pricePerKWh;
+  const highPrice = forecastPrice / 1000;
+  const savings = (coolingLoad * reductionPercent * hours * (highPrice - currentPrice)).toFixed(2);
+  return savings;
+}
+
+// Calculate savings from volatility arbitrage
+function calculateVolatilitySavings(volatility) {
+  const batteryCapacity = appData.batteryPVSystem?.batterySystem?.capacity || 500; // kWh
+  const cyclesPerDay = 2; // Charge/discharge cycles
+  const priceSpread = (volatility / 100) * appData.mibelPrices.current.pricePerKWh;
+  const savings = (batteryCapacity * cyclesPerDay * priceSpread * 0.5).toFixed(2); // 50% efficiency
+  return savings;
+}
+
+// Calculate savings from battery volatility trading
+function calculateBatteryVolatilitySavings(volatility) {
+  return calculateVolatilitySavings(volatility);
+}
+
+// Calculate savings from trend-based actions
+function calculateTrendSavings(percentageChange) {
+  const consumption = appData.realTimeData.totalConsumption || 2847.5; // kWh/day
+  const currentPrice = appData.mibelPrices.current.pricePerKWh;
+  const highPrice = currentPrice * (1 + Math.abs(percentageChange) / 100);
+  const reductionPercent = 0.1; // 10% consumption reduction
+  const savings = (consumption * reductionPercent * (highPrice - currentPrice)).toFixed(2);
+  return savings;
+}
+
+// Calculate savings from maximizing renewable usage
+function calculateRenewableSavings() {
+  const production = appData.realTimeData.currentProduction || 1956.3; // kWh
+  const currentPrice = appData.mibelPrices.current.pricePerKWh;
+  const gridPrice = appData.mibelPrices.current.pricePerKWh;
+  const savings = (production * gridPrice).toFixed(2); // Value of self-consumed energy
+  return savings;
+}
+
+// Calculate savings from deferred workload execution
+function calculateDeferredWorkloadSavings(percentageDecrease) {
+  const deferredWorkload = 200; // kW of deferrable workload
+  const hours = 6; // Hours to defer
+  const currentPrice = appData.mibelPrices.current.pricePerKWh;
+  const lowPrice = currentPrice * (1 + percentageDecrease / 100);
+  const savings = (deferredWorkload * hours * (currentPrice - lowPrice)).toFixed(2);
+  return savings;
+}
+
+function calculateCostImpact(priceIncrease, forecastPrice) {
+  // Estimate cost impact based on current consumption and price increase
+  const currentConsumption = appData.realTimeData.totalConsumption || 2847.5; // kWh
+  const pricePerKWhIncrease = (forecastPrice / 1000) - appData.mibelPrices.current.pricePerKWh;
+  return (currentConsumption * pricePerKWhIncrease).toFixed(2);
+}
+
+// Calculate forecast accuracy based on historical data
+function calculateForecastAccuracy() {
+  if (!appData.mibelForecast.historicalData || appData.mibelForecast.historicalData.length < 2) {
+    return;
+  }
+  
+  const historicalData = appData.mibelForecast.historicalData;
+  const accuracyMetrics = {
+    shortTerm: {
+      mape: 0, // Mean Absolute Percentage Error
+      mae: 0,  // Mean Absolute Error
+      rmse: 0, // Root Mean Square Error
+      accuracy: 0,
+      dataPoints: 0
+    },
+    mediumTerm: {
+      mape: 0,
+      mae: 0,
+      rmse: 0,
+      accuracy: 0,
+      dataPoints: 0
+    }
+  };
+  
+  // Calculate accuracy for each forecast type
+  historicalData.forEach((entry, index) => {
+    if (entry.forecastUsed && entry.actualPrice) {
+      const forecastPrice = entry.forecastUsed.average * 1000; // Convert to €/MWh
+      const actualPrice = entry.actualPrice;
+      
+      const error = Math.abs(forecastPrice - actualPrice);
+      const percentageError = (error / actualPrice) * 100;
+      const squaredError = Math.pow(forecastPrice - actualPrice, 2);
+      
+      // Determine forecast type based on horizon
+      const forecastType = entry.forecastUsed.volatility ? 'shortTerm' : 'mediumTerm';
+      
+      accuracyMetrics[forecastType].mae += error;
+      accuracyMetrics[forecastType].mape += percentageError;
+      accuracyMetrics[forecastType].rmse += squaredError;
+      accuracyMetrics[forecastType].dataPoints += 1;
+    }
+  });
+  
+  // Calculate averages and accuracy percentages
+  Object.keys(accuracyMetrics).forEach(type => {
+    const metrics = accuracyMetrics[type];
+    if (metrics.dataPoints > 0) {
+      metrics.mae = (metrics.mae / metrics.dataPoints).toFixed(2);
+      metrics.mape = (metrics.mape / metrics.dataPoints).toFixed(2);
+      metrics.rmse = Math.sqrt(metrics.rmse / metrics.dataPoints).toFixed(2);
+      
+      // Accuracy as percentage (100% - MAPE, capped at 100%)
+      metrics.accuracy = Math.max(0, Math.min(100, (100 - parseFloat(metrics.mape)))).toFixed(1);
+    }
+  });
+  
+  // Store accuracy metrics
+  if (!appData.mibelForecast.accuracyMetrics) {
+    appData.mibelForecast.accuracyMetrics = {
+      current: {},
+      historical: []
+    };
+  }
+  
+  appData.mibelForecast.accuracyMetrics.current = accuracyMetrics;
+  
+  // Store historical accuracy (daily snapshot)
+  const today = new Date().toISOString().split('T')[0];
+  const existingEntry = appData.mibelForecast.accuracyMetrics.historical.find(
+    h => h.date === today
+  );
+  
+  if (existingEntry) {
+    existingEntry.metrics = accuracyMetrics;
+    existingEntry.lastUpdate = new Date().toISOString();
+  } else {
+    appData.mibelForecast.accuracyMetrics.historical.push({
+      date: today,
+      metrics: accuracyMetrics,
+      lastUpdate: new Date().toISOString()
+    });
+  }
+  
+  // Keep only last 30 days of historical accuracy
+  if (appData.mibelForecast.accuracyMetrics.historical.length > 30) {
+    appData.mibelForecast.accuracyMetrics.historical.shift();
+  }
+  
+  // Update forecast confidence based on historical accuracy
+  updateForecastConfidence();
+}
+
+// Update forecast confidence based on historical accuracy
+function updateForecastConfidence() {
+  const accuracyMetrics = appData.mibelForecast.accuracyMetrics?.current;
+  
+  if (accuracyMetrics) {
+    // Update short-term forecast confidence
+    if (accuracyMetrics.shortTerm.accuracy) {
+      const shortTermAccuracy = parseFloat(accuracyMetrics.shortTerm.accuracy);
+      // Confidence is based on accuracy, but also considers recent performance
+      appData.mibelForecast.shortTerm.confidence = Math.min(95, Math.max(60, shortTermAccuracy));
+    }
+    
+    // Update medium-term forecast confidence
+    if (accuracyMetrics.mediumTerm.accuracy) {
+      const mediumTermAccuracy = parseFloat(accuracyMetrics.mediumTerm.accuracy);
+      appData.mibelForecast.mediumTerm.confidence = Math.min(85, Math.max(50, mediumTermAccuracy * 0.9));
+    }
+  }
+}
+
+// Render forecast accuracy metrics
+function renderForecastAccuracy() {
+  console.log('[FORECAST ACCURACY] ========== FUNCTION CALLED ==========');
+  
+  const accuracyContainer = document.getElementById('forecastAccuracyContainer');
+  if (!accuracyContainer) {
+    console.error('[FORECAST ACCURACY] ❌ Container "forecastAccuracyContainer" not found in DOM!');
+    return;
+  }
+  
+  console.log('[FORECAST ACCURACY] ✅ Container found');
+  
+  try {
+    const accuracyMetrics = appData.mibelForecast.accuracyMetrics?.current;
+    
+    if (!accuracyMetrics) {
+      accuracyContainer.innerHTML = `
+        <div class="accuracy-not-available">
+          <p>Forecast accuracy metrics will be available after collecting historical data.</p>
+        </div>
+      `;
+      return;
+    }
+    
+    accuracyContainer.innerHTML = `
+      <div class="forecast-accuracy-grid">
+        ${Object.keys(accuracyMetrics).map(type => {
+          const metrics = accuracyMetrics[type];
+          if (metrics.dataPoints === 0) return '';
+          
+          const typeLabel = type === 'shortTerm' ? 'Short-term (24-48h)' : 'Medium-term (7 days)';
+          const accuracyClass = parseFloat(metrics.accuracy) >= 80 ? 'high' : 
+                                parseFloat(metrics.accuracy) >= 60 ? 'medium' : 'low';
+          
+          return `
+            <div class="accuracy-card ${accuracyClass}">
+              <div class="accuracy-header">
+                <h4>${typeLabel}</h4>
+                <span class="accuracy-badge ${accuracyClass}">${metrics.accuracy}%</span>
+              </div>
+              <div class="accuracy-metrics">
+                <div class="metric-item">
+                  <span class="metric-label">MAPE</span>
+                  <span class="metric-value">${metrics.mape}%</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">MAE</span>
+                  <span class="metric-value">€${metrics.mae}/MWh</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">RMSE</span>
+                  <span class="metric-value">€${metrics.rmse}/MWh</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Data Points</span>
+                  <span class="metric-value">${metrics.dataPoints}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+      
+      ${appData.mibelForecast.accuracyMetrics.historical.length > 0 ? `
+        <div class="accuracy-history">
+          <h4>Accuracy Trend (Last 7 Days)</h4>
+          <div class="accuracy-chart-container" style="position: relative; height: 250px; margin-top: 1rem;">
+            <canvas id="forecastAccuracyChart"></canvas>
+          </div>
+        </div>
+      ` : ''}
+    `;
+    
+    // Render accuracy trend chart after HTML is inserted
+    const historicalLength = appData.mibelForecast.accuracyMetrics?.historical?.length || 0;
+    console.log(`[FORECAST ACCURACY] Historical data points: ${historicalLength}`);
+    
+    if (historicalLength > 0) {
+      console.log('[FORECAST ACCURACY] Scheduling accuracy chart render in 100ms');
+      setTimeout(() => {
+        renderForecastAccuracyChart();
+      }, 100);
+    } else {
+      console.log('[FORECAST ACCURACY] No historical data - skipping chart render');
+    }
+  } catch (error) {
+    console.error('Error rendering forecast accuracy:', error);
+  }
+}
+
+// Render accuracy trend chart (HTML version - kept for backwards compatibility)
+function renderAccuracyTrendChart() {
+  const historical = appData.mibelForecast.accuracyMetrics.historical.slice(-7);
+  
+  if (historical.length === 0) return '';
+  
+  return historical.map(entry => {
+    const shortTermAccuracy = parseFloat(entry.metrics.shortTerm?.accuracy || 0);
+    const mediumTermAccuracy = parseFloat(entry.metrics.mediumTerm?.accuracy || 0);
+    const date = new Date(entry.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    
+    return `
+      <div class="accuracy-bar-group">
+        <div class="bar-label">${date}</div>
+        <div class="bars">
+          <div class="accuracy-bar short-term" style="height: ${shortTermAccuracy}%" title="Short-term: ${shortTermAccuracy}%"></div>
+          <div class="accuracy-bar medium-term" style="height: ${mediumTermAccuracy}%" title="Medium-term: ${mediumTermAccuracy}%"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Render Forecast Accuracy Chart using Chart.js
+function renderForecastAccuracyChart() {
+  console.log('[CHART] Attempting to render forecast accuracy chart');
+  
+  const ctx = document.getElementById('forecastAccuracyChart');
+  if (!ctx) {
+    console.error('[CHART] Forecast accuracy chart canvas not found');
+    console.log('[CHART] Available canvases:', Array.from(document.querySelectorAll('canvas')).map(c => c.id));
+    return;
+  }
+  
+  console.log('[CHART] Found forecast accuracy canvas');
+  
+  try {
+    const historical = appData.mibelForecast.accuracyMetrics.historical.slice(-7);
+    
+    console.log(`[CHART] Historical accuracy data points: ${historical.length}`);
+    
+    if (historical.length === 0) {
+      console.warn('[CHART] No historical data available for accuracy chart');
+      return;
+    }
+    
+    // Destroy existing chart if it exists
+    if (charts.forecastAccuracy) {
+      console.log('[CHART] Destroying existing forecast accuracy chart');
+      charts.forecastAccuracy.destroy();
+    }
+    
+    const labels = historical.map(entry => {
+      const date = new Date(entry.date);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    });
+    
+    const shortTermData = historical.map(entry => parseFloat(entry.metrics.shortTerm?.accuracy || 0));
+    const mediumTermData = historical.map(entry => parseFloat(entry.metrics.mediumTerm?.accuracy || 0));
+    
+    charts.forecastAccuracy = new Chart(ctx.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Short-term (24-48h)',
+            data: shortTermData,
+            backgroundColor: 'rgba(31, 184, 205, 0.7)',
+            borderColor: 'rgb(31, 184, 205)',
+            borderWidth: 2
+          },
+          {
+            label: 'Medium-term (7 days)',
+            data: mediumTermData,
+            backgroundColor: 'rgba(255, 193, 133, 0.7)',
+            borderColor: 'rgb(255, 193, 133)',
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: 'var(--color-text)',
+              usePointStyle: true,
+              padding: 15
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            borderColor: 'rgba(31, 184, 205, 0.5)',
+            borderWidth: 1,
+            callbacks: {
+              label: function(context) {
+                return `${context.dataset.label}: ${context.parsed.y.toFixed(1)}%`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)',
+              drawBorder: false
+            },
+            ticks: {
+              color: 'var(--color-text-secondary)',
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            max: 100,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)',
+              drawBorder: false
+            },
+            ticks: {
+              color: 'var(--color-text-secondary)',
+              font: {
+                size: 11
+              },
+              callback: function(value) {
+                return value + '%';
+              }
+            },
+            title: {
+              display: true,
+              text: 'Accuracy (%)',
+              color: 'var(--color-text)',
+              font: {
+                size: 12,
+                weight: 'bold'
+              }
+            }
+          }
+        }
+      }
+    });
+    
+    console.log('[CHART] ✅ Successfully created forecast accuracy chart');
+  } catch (error) {
+    console.error('[CHART] ❌ Error rendering forecast accuracy chart:', error);
+  }
+}
+
+function showMIBELWarningNotification(warning) {
+  // Add to notification system
+  const notification = {
+    id: warning.id,
+    type: 'mibel_warning',
+    title: 'MIBEL Price Alert',
+    message: warning.message,
+    severity: warning.severity,
+    timestamp: new Date().toISOString(),
+    action: warning.recommendedAction,
+    data: warning
+  };
+  
+  // Add to app notifications if notification system exists
+  if (typeof addNotification === 'function') {
+    addNotification(notification);
+  } else {
+    console.log('MIBEL Warning:', notification);
+  }
+}
+
+function renderMIBELPrices() {
+  console.log('[MIBEL PRICES] ========== FUNCTION CALLED ==========');
+  console.log('Rendering MIBEL prices...');
+  
+  const mibelContainer = document.getElementById('mibelPricesContainer');
+  if (!mibelContainer) {
+    console.error('[MIBEL PRICES] ❌ Container "mibelPricesContainer" not found in DOM!');
+    console.log('[MIBEL PRICES] Available IDs:', Array.from(document.querySelectorAll('[id]')).map(el => el.id).filter(id => id.includes('mibel') || id.includes('forecast')));
+    return;
+  }
+  
+  console.log('[MIBEL PRICES] ✅ Container found');
+  
+  try {
+    // Check if data exists
+    if (!appData.mibelPrices || !appData.mibelPrices.current) {
+      console.warn('MIBEL prices data not available');
+      mibelContainer.innerHTML = `
+        <div class="mibel-price-card">
+          <div class="mibel-header">
+            <h3>MIBEL Current Price</h3>
+            <span class="mibel-source">Source: Loading...</span>
+          </div>
+          <div class="mibel-current-price">
+            <div class="price-value-large">Loading...</div>
+            <div class="price-unit">--</div>
+            <div class="price-per-kwh">--</div>
+          </div>
+        </div>
+      `;
+      return;
+    }
+    
+    const mibelData = appData.mibelPrices;
+    
+    mibelContainer.innerHTML = `
+      <div class="mibel-price-card">
+        <div class="mibel-header">
+          <h3>MIBEL Current Price</h3>
+          <span class="mibel-source">Source: ${mibelData.current.source || 'OMIE'}</span>
+        </div>
+        <div class="mibel-current-price">
+          <div class="price-value-large">€${(mibelData.current.price || 0).toFixed(2)}</div>
+          <div class="price-unit">${mibelData.current.unit || '€/MWh'}</div>
+          <div class="price-per-kwh">€${((mibelData.current.pricePerKWh || mibelData.current.price / 1000) || 0).toFixed(4)}/kWh</div>
+        </div>
+        <div class="mibel-daily-stats">
+          <div class="stat-item">
+            <span class="stat-label">Daily Average</span>
+            <span class="stat-value">€${(mibelData.daily?.average || 0).toFixed(2)}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Min</span>
+            <span class="stat-value">€${(mibelData.daily?.min || 0).toFixed(2)}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Max</span>
+            <span class="stat-value">€${(mibelData.daily?.max || 0).toFixed(2)}</span>
+          </div>
+        </div>
+        <div class="mibel-trend">
+          <span class="trend-label">24h Trend:</span>
+          <span class="trend-value ${mibelData.trend?.direction || 'stable'}">
+            ${mibelData.trend?.direction === 'increasing' ? '↑' : mibelData.trend?.direction === 'decreasing' ? '↓' : '→'} ${mibelData.trend?.percentageChange || '0'}%
+          </span>
+        </div>
+        <div class="mibel-update-time">
+          Last updated: ${mibelData.current.timestamp ? new Date(mibelData.current.timestamp).toLocaleString() : 'Never'}
+        </div>
+      </div>
+    `;
+  } catch (error) {
+    console.error('Error rendering MIBEL prices:', error);
+    mibelContainer.innerHTML = `
+      <div class="mibel-price-card">
+        <div class="mibel-header">
+          <h3>MIBEL Current Price</h3>
+        </div>
+        <div class="mibel-current-price">
+          <div style="color: #ef4444;">Error loading prices</div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+function renderMIBELForecast() {
+  console.log('[MIBEL FORECAST] ========== FUNCTION CALLED ==========');
+  console.log('Rendering MIBEL forecast...');
+  
+  const forecastContainer = document.getElementById('mibelForecastContainer');
+  if (!forecastContainer) {
+    console.error('[MIBEL FORECAST] ❌ Container "mibelForecastContainer" not found in DOM!');
+    console.log('[MIBEL FORECAST] Available IDs:', Array.from(document.querySelectorAll('[id]')).map(el => el.id).filter(id => id.includes('mibel') || id.includes('forecast')));
+    return;
+  }
+  
+  console.log('[MIBEL FORECAST] ✅ Container found');
+  
+  try {
+    // Check if data exists
+    if (!appData.mibelForecast || !appData.mibelForecast.shortTerm) {
+      console.warn('MIBEL forecast data not available');
+      forecastContainer.innerHTML = `
+        <div class="mibel-forecast-section">
+          <div class="forecast-tabs">
+            <button class="forecast-tab active" data-forecast="shortTerm">24-48h</button>
+            <button class="forecast-tab" data-forecast="mediumTerm">7 Days</button>
+            <button class="forecast-tab" data-forecast="longTerm">30 Days</button>
+          </div>
+          <div class="forecast-content">
+            <p>Forecast data loading...</p>
+          </div>
+        </div>
+      `;
+      return;
+    }
+    
+    const forecast = appData.mibelForecast;
+    const shortTerm = forecast.shortTerm;
+    const mediumTerm = forecast.mediumTerm;
+    
+    forecastContainer.innerHTML = `
+      <div class="mibel-forecast-section">
+        <div class="forecast-tabs">
+          <button class="forecast-tab active" data-forecast="shortTerm">24-48h</button>
+          <button class="forecast-tab" data-forecast="mediumTerm">7 Days</button>
+          <button class="forecast-tab" data-forecast="longTerm">30 Days</button>
+        </div>
+        
+        <div class="forecast-content" id="forecastContent">
+          ${renderForecastContent('shortTerm', shortTerm)}
+        </div>
+      </div>
+    `;
+    
+    // Render initial chart
+    setTimeout(() => {
+      console.log('[MIBEL] Rendering initial forecast chart for shortTerm');
+      renderMIBELForecastChart('shortTerm', shortTerm);
+      
+      // Add tab event listeners after a brief delay to ensure DOM is ready
+      const tabs = forecastContainer.querySelectorAll('.forecast-tab');
+      console.log(`[MIBEL] Found ${tabs.length} forecast tabs`);
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          
+          const forecastType = tab.dataset.forecast;
+          const forecastData = forecast[forecastType];
+          console.log(`[MIBEL] Tab clicked: ${forecastType}`);
+          
+          const contentDiv = document.getElementById('forecastContent');
+          if (contentDiv && forecastData) {
+            contentDiv.innerHTML = renderForecastContent(forecastType, forecastData);
+            // Render chart for the selected tab
+            setTimeout(() => {
+              console.log(`[MIBEL] Rendering chart for ${forecastType}`);
+              renderMIBELForecastChart(forecastType, forecastData);
+            }, 50);
+          }
+        });
+      });
+    }, 100);
+  } catch (error) {
+    console.error('Error rendering MIBEL forecast:', error);
+    forecastContainer.innerHTML = `
+      <div class="mibel-forecast-section">
+        <div style="color: #ef4444; padding: 2rem; text-align: center;">
+          Error loading forecast data
+        </div>
+      </div>
+    `;
+  }
+}
+
+function renderForecastContent(type, data) {
+  if (!data) return '';
+  
+  if (type === 'shortTerm' || type === 'mediumTerm') {
+    const chartId = `mibelForecastChart_${type}`;
+    return `
+      <div class="forecast-details">
+        <div class="forecast-meta">
+          <span class="forecast-method">Method: ${data.method}</span>
+          <span class="forecast-confidence">Confidence: ${data.confidence}%</span>
+        </div>
+        <div class="forecast-chart-container" style="position: relative; height: 300px; margin-bottom: 1.5rem;">
+          <canvas id="${chartId}"></canvas>
+        </div>
+        <div class="forecast-prices-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Average</th>
+                <th>Min</th>
+                <th>Max</th>
+                ${type === 'shortTerm' ? '<th>Volatility</th>' : ''}
+              </tr>
+            </thead>
+            <tbody>
+              ${data.prices.map(price => `
+                <tr>
+                  <td>${price.date}</td>
+                  <td>€${price.average.toFixed(2)}</td>
+                  <td>€${price.min.toFixed(2)}</td>
+                  <td>€${price.max.toFixed(2)}</td>
+                  ${type === 'shortTerm' ? `<td>${price.volatility || 'N/A'}</td>` : ''}
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  } else if (type === 'longTerm') {
+    const chartId = `mibelForecastChart_longTerm`;
+    return `
+      <div class="forecast-details">
+        <div class="forecast-meta">
+          <span class="forecast-method">Method: ${data.method}</span>
+          <span class="forecast-confidence">Confidence: ${data.confidence}%</span>
+        </div>
+        <div class="forecast-chart-container" style="position: relative; height: 300px; margin-bottom: 1.5rem;">
+          <canvas id="${chartId}"></canvas>
+        </div>
+        <div class="forecast-weekly">
+          ${data.weeklyAverage.map(week => `
+            <div class="week-forecast">
+              <div class="week-info">
+                <span class="week-number">Week ${week.week}</span>
+                <span class="week-trend ${week.trend}">${week.trend}</span>
+              </div>
+              <div class="week-price">€${week.average.toFixed(2)}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+  return '';
+}
+
+// Render MIBEL Forecast Chart
+function renderMIBELForecastChart(type, data) {
+  console.log(`[CHART] Attempting to render MIBEL forecast chart for ${type}`);
+  
+  if (!data) {
+    console.warn(`[CHART] No data provided for ${type}`);
+    return;
+  }
+  
+  console.log(`[CHART] Data for ${type}:`, data);
+  
+  const chartId = `mibelForecastChart_${type}`;
+  const ctx = document.getElementById(chartId);
+  
+  if (!ctx) {
+    console.error(`[CHART] Canvas element "${chartId}" not found in DOM`);
+    console.log('[CHART] Available canvases:', Array.from(document.querySelectorAll('canvas')).map(c => c.id));
+    return;
+  }
+  
+  console.log(`[CHART] Found canvas element: ${chartId}`);
+  
+  try {
+    // Check if Chart.js is loaded
+    if (typeof Chart === 'undefined') {
+      console.error('[CHART] Chart.js is not loaded!');
+      return;
+    }
+    
+    // Destroy existing chart if it exists
+    const chartKey = `mibelForecast_${type}`;
+    if (charts[chartKey]) {
+      console.log(`[CHART] Destroying existing chart: ${chartKey}`);
+      charts[chartKey].destroy();
+    }
+    
+    let labels, datasets;
+    
+    if (type === 'shortTerm' || type === 'mediumTerm') {
+      // For short-term and medium-term forecasts
+      labels = data.prices.map(p => {
+        const date = new Date(p.date);
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      });
+      
+      datasets = [
+        {
+          label: 'Average Price',
+          data: data.prices.map(p => p.average),
+          borderColor: 'rgb(31, 184, 205)',
+          backgroundColor: 'rgba(31, 184, 205, 0.1)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 5,
+          pointHoverRadius: 7
+        },
+        {
+          label: 'Min Price',
+          data: data.prices.map(p => p.min),
+          borderColor: 'rgb(34, 197, 94)',
+          backgroundColor: 'rgba(34, 197, 94, 0.1)',
+          tension: 0.4,
+          fill: false,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          borderDash: [5, 5]
+        },
+        {
+          label: 'Max Price',
+          data: data.prices.map(p => p.max),
+          borderColor: 'rgb(239, 68, 68)',
+          backgroundColor: 'rgba(239, 68, 68, 0.1)',
+          tension: 0.4,
+          fill: false,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          borderDash: [5, 5]
+        }
+      ];
+    } else if (type === 'longTerm') {
+      // For long-term forecasts
+      labels = data.weeklyAverage.map(w => `Week ${w.week}`);
+      
+      datasets = [
+        {
+          label: 'Weekly Average Price',
+          data: data.weeklyAverage.map(w => w.average),
+          borderColor: 'rgb(31, 184, 205)',
+          backgroundColor: 'rgba(31, 184, 205, 0.1)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 6,
+          pointHoverRadius: 8
+        }
+      ];
+    }
+    
+    console.log(`[CHART] Creating chart with labels:`, labels);
+    console.log(`[CHART] Number of datasets:`, datasets.length);
+    
+    charts[chartKey] = new Chart(ctx.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: datasets
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: 'var(--color-text)',
+              usePointStyle: true,
+              padding: 15
+            }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            borderColor: 'rgba(31, 184, 205, 0.5)',
+            borderWidth: 1,
+            callbacks: {
+              label: function(context) {
+                return `${context.dataset.label}: €${context.parsed.y.toFixed(2)}/MWh`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)',
+              drawBorder: false
+            },
+            ticks: {
+              color: 'var(--color-text-secondary)',
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)',
+              drawBorder: false
+            },
+            ticks: {
+              color: 'var(--color-text-secondary)',
+              font: {
+                size: 11
+              },
+              callback: function(value) {
+                return '€' + value.toFixed(0);
+              }
+            },
+            title: {
+              display: true,
+              text: 'Price (€/MWh)',
+              color: 'var(--color-text)',
+              font: {
+                size: 12,
+                weight: 'bold'
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        }
+      }
+    });
+    
+    console.log(`[CHART] ✅ Successfully created chart: ${chartKey}`);
+  } catch (error) {
+    console.error(`[CHART] ❌ Error rendering MIBEL forecast chart for ${type}:`, error);
+  }
+}
+
+function renderMIBELEarlyWarnings() {
+  console.log('Rendering MIBEL early warnings...');
+  
+  const warningsContainer = document.getElementById('mibelWarningsContainer');
+  if (!warningsContainer) {
+    console.warn('MIBEL warnings container not found');
+    return;
+  }
+  
+  try {
+    // Check if data exists
+    if (!appData.mibelEarlyWarnings) {
+      console.warn('MIBEL warnings data not available');
+      warningsContainer.innerHTML = `
+        <div class="no-warnings">
+          <span class="no-warnings-icon">⏳</span>
+          <p>Loading warnings...</p>
+        </div>
+      `;
+      return;
+    }
+    
+    const warnings = appData.mibelEarlyWarnings.activeWarnings || [];
+    
+    if (warnings.length === 0) {
+      warningsContainer.innerHTML = `
+        <div class="no-warnings">
+          <span class="no-warnings-icon">✅</span>
+          <p>No active warnings. Market conditions are stable.</p>
+        </div>
+      `;
+      return;
+    }
+    
+    warningsContainer.innerHTML = warnings.map(warning => {
+      const severityClass = warning.severity === 'high' ? 'warning-high' : 
+                           warning.severity === 'medium' ? 'warning-medium' : 'warning-low';
+      const warningIcon = warning.severity === 'high' ? '🚨' : 
+                         warning.severity === 'medium' ? '⚠️' : 'ℹ️';
+      
+      return `
+        <div class="mibel-warning-card ${severityClass}">
+          <div class="warning-header">
+            <span class="warning-icon">${warningIcon}</span>
+            <div class="warning-title">
+              <h4>${warning.type.replace('_', ' ').toUpperCase()}</h4>
+              <span class="warning-time">${new Date(warning.time).toLocaleString()}</span>
+            </div>
+            <span class="warning-severity">${warning.severity}</span>
+          </div>
+          <div class="warning-message">
+            <p>${warning.message}</p>
+          </div>
+          ${warning.recommendedActions && warning.recommendedActions.length > 0 ? `
+            <div class="warning-actions">
+              <h5>Recommended Actions:</h5>
+              ${warning.recommendedActions.map((action, index) => `
+                <div class="recommended-action-item priority-${action.priority}">
+                  <div class="action-header">
+                    <span class="action-priority">Priority ${action.priority}</span>
+                    <span class="action-impact ${action.impact}">${action.impact} impact</span>
+                    ${action.automated ? '<span class="action-automated">🤖 Automated</span>' : ''}
+                  </div>
+                  <div class="action-description">${action.action}</div>
+                  ${action.estimatedSavings > 0 ? `
+                    <div class="action-savings">
+                      <span class="savings-label">Estimated Savings:</span>
+                      <span class="savings-value">€${parseFloat(action.estimatedSavings).toLocaleString()}</span>
+                    </div>
+                  ` : ''}
+                  <div class="action-metadata">
+                    <span class="action-time">⏱️ ${action.implementationTime}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          ` : `
+            <div class="warning-action">
+              <strong>Recommended:</strong> ${warning.primaryAction?.action || warning.recommendedAction || 'Monitor forecasts closely'}
+            </div>
+          `}
+          ${warning.impact ? `
+            <div class="warning-impact">
+              ${warning.impact.estimatedCostIncrease ? 
+                `<span>Estimated cost impact: €${warning.impact.estimatedCostIncrease}</span>` : ''}
+              ${warning.impact.volatilityRange ? 
+                `<span>Volatility: ${warning.impact.volatilityRange}</span>` : ''}
+              ${warning.impact.timeWindow ? 
+                `<span>Time window: ${warning.impact.timeWindow}</span>` : ''}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }).join('');
+  } catch (error) {
+    console.error('Error rendering MIBEL early warnings:', error);
+  }
+}
+
+function renderIndexTariffs() {
+  console.log('Rendering index tariffs...');
+  
+  const tariffsContainer = document.getElementById('indexTariffsContainer');
+  if (!tariffsContainer) return;
+  
+  try {
+    const tariffs = appData.indexTariffs.active;
+    
+    tariffsContainer.innerHTML = tariffs.map(tariff => {
+      const mibelPrice = appData.mibelPrices.current.pricePerKWh;
+      const mibelComponent = mibelPrice * tariff.mibelMultiplier;
+      const effectivePrice = tariff.currentEffectivePrice;
+      
+      return `
+        <div class="index-tariff-card">
+          <div class="tariff-header">
+            <h4>${tariff.provider}</h4>
+            <span class="tariff-type-badge">Index Tariff</span>
+          </div>
+          <div class="tariff-pricing">
+            <div class="price-breakdown">
+              <div class="price-component">
+                <span class="component-label">Base Price:</span>
+                <span class="component-value">€${tariff.basePrice.toFixed(3)}/kWh</span>
+              </div>
+              <div class="price-component">
+                <span class="component-label">MIBEL Component (${(tariff.mibelMultiplier * 100).toFixed(0)}%):</span>
+                <span class="component-value">€${mibelComponent.toFixed(4)}/kWh</span>
+              </div>
+              <div class="price-component">
+                <span class="component-label">Fixed Margin:</span>
+                <span class="component-value">€${tariff.fixedMargin.toFixed(3)}/kWh</span>
+              </div>
+              <div class="price-component total">
+                <span class="component-label">Effective Price:</span>
+                <span class="component-value">€${effectivePrice.toFixed(4)}/kWh</span>
+              </div>
+            </div>
+          </div>
+          <div class="tariff-consumption">
+            <div class="consumption-item">
+              <span>Base Load:</span>
+              <strong>${tariff.consumptionBreakdown.baseLoad} kW</strong>
+            </div>
+            <div class="consumption-item">
+              <span>Variable Load:</span>
+              <strong>${tariff.consumptionBreakdown.variableLoad} kW</strong>
+            </div>
+          </div>
+          <div class="tariff-update-info">
+            <span>Last updated: ${new Date(tariff.lastUpdate).toLocaleString()}</span>
+            <span>Update frequency: ${tariff.updateFrequency}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } catch (error) {
+    console.error('Error rendering index tariffs:', error);
+  }
 }
 
 function renderSustainability() {
@@ -3152,41 +5057,6 @@ function resetGoals() {
     showToast('Goals reset to default values');
   }, 800);
 }
-
-// Switch tab function
-function switchTab(tabId) {
-  console.log('Switching to tab:', tabId);
-  
-  // Remove active class from all tabs and content
-  document.querySelectorAll('.sidebar-nav-item').forEach(item => {
-    item.classList.remove('active');
-  });
-  
-  document.querySelectorAll('.tab-content').forEach(content => {
-    content.classList.remove('active');
-  });
-  
-  // Add active class to selected tab and content
-  const selectedNavItem = document.querySelector(`.sidebar-nav-item[data-tab="${tabId}"]`);
-  const selectedContent = document.getElementById(`${tabId}-tab`);
-  
-  if (selectedNavItem) {
-    selectedNavItem.classList.add('active');
-  }
-  
-  if (selectedContent) {
-    selectedContent.classList.add('active');
-    
-    // Render content if needed
-    if (tabId === 'contracts') {
-      renderERSEPrices();
-      renderPersonalizedAnalysis();
-    }
-  }
-  
-  showToast(`Switched to ${tabId}`);
-}
-
 // Enhanced Switch Provider Modal with proper radio button functionality
 function showSwitchProviderModal() {
   const modal = document.getElementById('switchProviderModal');
